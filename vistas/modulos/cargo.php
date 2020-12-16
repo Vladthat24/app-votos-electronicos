@@ -4,7 +4,7 @@
 
     <h1>
 
-      Administrar Lista
+      Administrar Cargos del Trabajador
 
     </h1>
 
@@ -12,7 +12,7 @@
 
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
 
-      <li class="active">Administrar Lista</li>
+      <li class="active">Administrar Cargos del Trabajador</li>
 
     </ol>
 
@@ -24,9 +24,9 @@
 
       <div class="box-header with-border">
 
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarLista">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCargo">
 
-          Agregar Lista
+          Administrar Cargos del Trabajador
 
         </button>
 
@@ -41,8 +41,8 @@
             <tr>
 
               <th style="width:10px">#</th>
-              <th>Nombre</th>
-              <th>Descripcion</th>
+              <th>Cargo</th>
+              <th>Fecha Registro</th>
               <th>Acciones</th>
 
             </tr>
@@ -56,24 +56,24 @@
             $item = null;
             $valor = null;
 
-            $lista = ControladorLista::ctrMostrarLista($item, $valor);
+            $cargo = ControladorCargo::ctrMostrarCargo($item, $valor);
 
-            foreach ($lista as $key => $value) {
+            foreach ($cargo as $key => $value) {
 
               echo ' <tr>
 
                     <td>' . ($key + 1) . '</td>
 
                     <td class="text-uppercase">' . $value["nombre"] . '</td>
-                    <td class="text-uppercase">' . $value["descripcion"] . '</td>
+                    <td class="text-uppercase">' . $value["fecha"] . '</td>
 
                     <td>
 
                       <div class="btn-group">
                           
-                        <button class="btn btn-warning btnEditarLista" idLista="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarLista"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-warning btnEditarCargo" idCargo="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarCargo"><i class="fa fa-pencil"></i></button>
 
-                        <button class="btn btn-danger btnEliminarLista" idLista="' . $value["id"] . '"><i class="fa fa-times"></i></button>
+                        <button class="btn btn-danger btnEliminarCargo" idCargo="' . $value["id"] . '"><i class="fa fa-times"></i></button>
 
                       </div>  
 
@@ -97,10 +97,10 @@
 </div>
 
 <!--=====================================
-MODAL AGREGAR LISTA
+MODAL AGREGAR CARGO
 ======================================-->
 
-<div id="modalAgregarLista" class="modal fade" role="dialog">
+<div id="modalAgregarCargo" class="modal fade" role="dialog">
 
   <div class="modal-dialog">
 
@@ -116,7 +116,7 @@ MODAL AGREGAR LISTA
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Agregar Lista</h4>
+          <h4 class="modal-title">Agregar Cargo</h4>
 
         </div>
 
@@ -136,22 +136,7 @@ MODAL AGREGAR LISTA
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevNombre" placeholder="Ingresar Nombre" required>
-
-              </div>
-
-            </div>
-
-
-            <!-- ENTRADA PARA EL DESCRIPCION -->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
-                <input type="text" class="form-control input-lg" name="nuevDescripcion" placeholder="Ingresar Descripcion" required>
+                <input type="text" class="form-control input-lg" name="nuevCargo" placeholder="Ingresar Cargo del Trabajdor" required>
 
               </div>
 
@@ -169,20 +154,19 @@ MODAL AGREGAR LISTA
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar Lista</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
 
         </div>
 
+        <?php
 
+        $crearCargo = new ControladorCargo();
+        $crearCargo->ctrCrearCargo();
+
+        ?>
 
       </form>
 
-      <?php
-
-      $crearLista = new ControladorLista();
-      $crearLista->ctrCrearLista();
-
-      ?>
     </div>
 
   </div>
@@ -190,10 +174,10 @@ MODAL AGREGAR LISTA
 </div>
 
 <!--=====================================
-MODAL EDITAR LISTA
+MODAL EDITAR CARGO
 ======================================-->
 
-<div id="modalEditarLista" class="modal fade" role="dialog">
+<div id="modalEditarCargo" class="modal fade" role="dialog">
 
   <div class="modal-dialog">
 
@@ -209,7 +193,7 @@ MODAL EDITAR LISTA
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-          <h4 class="modal-title">Editar Estado</h4>
+          <h4 class="modal-title">Editar</h4>
 
         </div>
 
@@ -229,24 +213,9 @@ MODAL EDITAR LISTA
 
                 <span class="input-group-addon"><i class="fa fa-th"></i></span>
 
-                <input type="text" class="form-control input-lg" name="editarNombre" id="editarNombre" required>
+                <input type="text" class="form-control input-lg" name="editarCargo" id="editarCargo" required>
 
-                <input type="hidden" name="editarId" id="editarId" required>
-
-              </div>
-
-            </div>
-
-
-            <!-- ENTRADA PARA EL DESCRIPCION -->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-th"></i></span>
-
-                <input type="text" class="form-control input-lg" name="editarDescripcion" id="editarDescripcion" required>
+                <input type="hidden" name="idCargo" id="idCargo" required>
 
               </div>
 
@@ -270,8 +239,8 @@ MODAL EDITAR LISTA
 
         <?php
 
-        $editarLista = new ControladorLista();
-        $editarLista->ctrEditarLista();
+        $editarCargo = new ControladorCargo();
+        $editarCargo->ctrEditarCargo();
 
         ?>
 
@@ -285,7 +254,7 @@ MODAL EDITAR LISTA
 
 <?php
 
-$borrarLista = new ControladorLista();
-$borrarLista->ctrBorrarLista();
+$borrarCargo = new ControladorCargo();
+$borrarCargo->ctrBorrarCargo();
 
 ?>

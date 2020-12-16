@@ -24,30 +24,52 @@ class ControladorLista
 
 				$fecha = date('d-m-Y');
 
-				$datos = array("nombre" => $_POST["nuevNombre"],
+				$datos = array(
+					"nombre" => $_POST["nuevNombre"],
 					"descripcion" => $_POST["nuevDescripcion"],
-					"fecha_registro" => $fecha);
+					"fecha_registro" => $fecha
+				);
+
 
 				$respuesta = ModeloLista::mdlIngresarLista($tabla, $datos);
+
+				var_dump($respuesta);
 
 				if ($respuesta == "ok") {
 
 					echo '<script>
+            
+						swal({
+							  type: "success",
+							  title: "La visita ha sido registrado correctamente",
+							  showConfirmButton: true,
+							  confirmButtonText: "Cerrar"
+							  }).then((result) => {
+										if (result.value) {
 
-					swal({
-						  type: "success",
-						  title: "La Lista ha sido guardada correctamente,
-						  showConfirmButton: true,
-						  confirmButtonText: "Cerrar"
-						  }).then(function(result){
+										window.location = "lista";
+
+										}
+									})
+
+						</script>';
+				} else {
+					echo '<script>
+            
+							swal({
+								type: "success",
+								title: "Error al Registrar en la BDD, Comunicarse con el Administrador",
+								showConfirmButton: true,
+								confirmButtonText: "Cerrar"
+								}).then((result) => {
 									if (result.value) {
 
-									window.location = "lista";
+									
 
 									}
-								})
+									})
 
-					</script>';
+							</script>';
 				}
 			} else {
 

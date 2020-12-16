@@ -14,7 +14,7 @@ class Conexion
 		$link->exec("set names utf8"); */
 
 		$link = new PDO(
-			"mysql:host=localhost;dbname=dirislim_votoselectronicos",
+			"mysql:host=localhost;dbname=dirislim_votoonline",
 			"root",
 			"");
 		$link->exec("set names utf8");

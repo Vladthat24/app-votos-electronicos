@@ -9,6 +9,7 @@ require_once "controladores/ventas.controlador.php";
 require_once "controladores/soporte.controlador.php";
 require_once "controladores/lista.controlador.php";
 require_once "controladores/reporteticket.controlador.php";
+require_once "controladores/cargo.controlador.php";
 
 require_once "modelos/usuarios.modelo.php";
 require_once "modelos/roles.modelo.php";
@@ -18,6 +19,8 @@ require_once "modelos/ventas.modelo.php";
 require_once "modelos/soporte.modelo.php";
 require_once "modelos/lista.modelo.php";
 require_once "modelos/reporteticket.modelo.php";
+require_once "modelos/cargo.modelo.php";
+
 
 $plantilla = new ControladorPlantilla();
-$plantilla -> ctrPlantilla();
+$plantilla->ctrPlantilla();

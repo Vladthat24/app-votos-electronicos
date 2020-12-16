@@ -75,10 +75,10 @@
             </li>
             <li>
 
-                <a href="soporte">
+                <a href="cargo">
 
                     <i class="fa fa fa-bed"></i>
-                    <span>Soporte</span>
+                    <span>cargo</span>
 
                 </a>
 
@@ -107,19 +107,10 @@
 						<a href="reporteticket">
 							
 							<i class="fa fa-circle-o"></i>
-							<span>Reporte Ticket</span>
+							<span>Reporte</span>
 
 						</a>
 
-					</li>
-
-					<li>
-
-						<a href="reporteestadistico">
-						
-							<i class="fa fa-circle-o"></i>
-							<span>Reporte Estadistica</span>
-						</a>
 					</li>';
             }
             ?>

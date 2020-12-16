@@ -12,17 +12,18 @@ class ModeloLista
 	static public function mdlIngresarLista($tabla, $datos)
 	{
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre,descripcion,fecha_registro) VALUES (:nombre,:descripcion,:fecha_registro)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (nombre,descripcion,fecha_registro) VALUES (:nombre,:descripcion,:fecha_registro)");
 
-		$stmt->bindParam(":nombre", $datos, PDO::PARAM_STR);
-		$stmt->bindParam(":descripcion", $datos, PDO::PARAM_STR);
-		$stmt->bindParam(":fecha_registro", $datos, PDO::PARAM_STR);
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha_registro", $datos["fecha_registro"], PDO::PARAM_STR);
 
 
 
 		if ($stmt->execute()) {
 
 			return "ok";
+			
 		} else {
 
 			return "error";

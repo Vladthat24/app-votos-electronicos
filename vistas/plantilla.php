@@ -138,7 +138,7 @@
         $_GET["ruta"] == "inicio" ||
         $_GET["ruta"] == "usuarios" ||
         $_GET["ruta"] == "roles" ||
-        $_GET["ruta"] == "soporte" ||
+        $_GET["ruta"] == "cargo" ||
         $_GET["ruta"] == "lista" ||
         $_GET["ruta"] == "ticket" ||
         $_GET["ruta"] == "reporteticket" ||
@@ -178,7 +178,7 @@
   <script src="vistas/js/ventas.js"></script>
   <script src="vistas/js/consultaReniec.js"></script>
   <script src="vistas/js/soporte.js"></script>
-  <script src="vistas/js/estado.js"></script>
+  <script src="vistas/js/lista.js"></script>
   <script src="vistas/js/reporteestadistico.js"></script>
   <script src="vistas/js/notificar.js"></script>
 
