@@ -2,116 +2,108 @@
 
 require_once "conexion.php";
 
-class ModeloCargo{
+class ModeloCargo
+{
 
 	/*=============================================
 	CREAR CARGO
 	=============================================*/
 
-	static public function mdlIngresarCargo($tabla, $datos){
+	static public function mdlIngresarCargo($tabla, $datos)
+	{
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre,fecha_registro) VALUES (:nombre,SYSDATETIME())");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre,fecha_registro) VALUES (:nombre,:fecha_registro)");
 
-		$stmt->bindParam(":nombre", $datos, PDO::PARAM_STR);
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":fecha_registro", $datos["fecha_registro"], PDO::PARAM_STR);
 
-		if($stmt->execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-		
 		}
 
 		$stmt->close();
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	MOSTRAR CARGO
 	=============================================*/
 
-	static public function mdlMostrarCargo($tabla, $item, $valor){
+	static public function mdlMostrarCargo($tabla, $item, $valor)
+	{
 
-		if($item != null){
+		if ($item != null) {
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
 
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+			$stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
 
-			$stmt -> execute();
+			$stmt->execute();
 
-			return $stmt -> fetch();
+			return $stmt->fetch();
+		} else {
 
-		}else{
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla order by id desc");
 
-			$stmt = Conexion::conectar()->prepare("SELECT id,nombre,convert(date,fecha_registro) as fecha FROM $tabla");
+			$stmt->execute();
 
-			$stmt -> execute();
-
-			return $stmt -> fetchAll();
-
+			return $stmt->fetchAll();
 		}
 
-		$stmt -> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	EDITAR CARGO
 	=============================================*/
 
-	static public function mdlEditarCargo($tabla, $datos){
+	static public function mdlEditarCargo($tabla, $datos)
+	{
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre WHERE id = :id");
 
-		$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_INT);
+		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
 
-		if($stmt->execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-
-		}else{
+		} else {
 
 			return "error";
-		
 		}
 
 		$stmt->close();
 		$stmt = null;
-
 	}
 
 	/*=============================================
 	BORRAR CARGO
 	=============================================*/
 
-	static public function mdlBorrarCargo($tabla, $datos){
+	static public function mdlBorrarCargo($tabla, $datos)
+	{
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 
-		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+		$stmt->bindParam(":id", $datos, PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+		if ($stmt->execute()) {
 
 			return "ok";
-		
-		}else{
+		} else {
 
-			return "error";	
-
+			return "error";
 		}
 
-		$stmt -> close();
+		$stmt->close();
 
 		$stmt = null;
-
 	}
-
 }
-

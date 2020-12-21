@@ -9,7 +9,7 @@
 
                 <div class="login-logo">
 
-                    <!--          <img src="vistas/img/plantilla/logo-blanco-bloque.png" class="img-responsive" style="padding:30px 100px 0px 100px">-->
+                    
 
                 </div>
 
@@ -45,10 +45,17 @@
 
 
                         </div>
-                                               
+                        <br>
+                        <div class="row">
+
+                            <div class="col-xs-6">
+                                <a href="">Restablecer Contraseña</a>
+
+                            </div>
+                        </div>
                         <?php
-                        $login = new ControladorUsuarios();
-                        $login->ctrIngresoUsuario();
+                        $restablecer = new ControladorUsuarios();
+                        $restablecer->ctrNuevaContraseña();
                         ?>
 
                     </form>

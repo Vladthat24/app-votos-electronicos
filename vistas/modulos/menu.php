@@ -5,38 +5,81 @@
         <ul class="sidebar-menu">
 
             <?php
-            if ($_SESSION["roles"] == "Administrador") {
-                echo '
-            <li>
+            if ($_SESSION["roles"] == "ADMINISTRADOR" || $_SESSION["roles"] == "COMITE ELECTORAL") {
 
-                <a href="usuarios">
+                echo '           
+ 
+                    <li>
 
-                    <i class="fa fa-user"></i>
-                    <span>Usuarios</span>
+                        <a href="votar">
 
-                </a>
+                            <i class="fa fa-comment-o"></i>
+                            <span>Votar</span>
 
-            </li>
-                     
-                <li>
+                        </a>
 
-                    <a href="ticket">
+                    </li>   
+                    <li>
 
-                        <i class="fa fa-product-hunt"></i>
-                        <span>Ticket</span>
+                        <a href="usuarios">
+
+                            <i class="fa fa-user"></i>
+                            <span>Usuarios</span>
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                    <a href="listadetalle">
+
+                        <i class="fa fa-list-alt"></i>
+                        <span>Lista Detalle</span>
 
                     </a>
 
-                </li> ';
+                    </li>
+
+
+                    <li>
+
+                        <a href="roles">
+
+                            <i class="fa fa-users"></i>
+                            <span>Roles</span>
+
+                        </a>
+
+                    </li>
+                    <li>
+
+                        <a href="lista">
+
+                            <i class="fa fa-list-ol"></i>
+                            <span>Listado</span>
+
+                        </a>
+
+                    </li>
+                    <li>
+
+                        <a href="cargo">
+
+                            <i class="fa fa-user-plus"></i>
+                            <span>cargo</span>
+
+                        </a>
+
+                    </li>';
             } else {
-                echo '           
- 
+                echo '
             <li>
 
-                <a href="ticket">
+                <a href="votar">
 
-                    <i class="fa fa-product-hunt"></i>
-                    <span>Ticket</span>
+                    <i class="fa fa-comment-o"></i>
+                    <span>Votar</span>
 
                 </a>
 
@@ -50,68 +93,7 @@
 
                 </a>
 
-            </li>
-
-
-            <li>
-
-                <a href="roles">
-
-                    <i class="fa fa-th"></i>
-                    <span>Roles</span>
-
-                </a>
-
-            </li>
-            <li>
-
-                <a href="lista">
-
-                    <i class="fa fa-hourglass-end"></i>
-                    <span>Listado</span>
-
-                </a>
-
-            </li>
-            <li>
-
-                <a href="cargo">
-
-                    <i class="fa fa fa-bed"></i>
-                    <span>cargo</span>
-
-                </a>
-
-            </li>
-
-            <li class="treeview">
-
-				<a href="#">
-
-					<i class="fa fa-list-ul"></i>
-					
-					<span>Reporte</span>
-					
-					<span class="pull-right-container">
-					
-						<i class="fa fa-angle-left pull-right"></i>
-
-					</span>
-
-				</a>
-
-				<ul class="treeview-menu">
-					
-					<li>
-
-						<a href="reporteticket">
-							
-							<i class="fa fa-circle-o"></i>
-							<span>Reporte</span>
-
-						</a>
-
-					</li>';
+            </li>';
             }
             ?>
         </ul>

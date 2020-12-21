@@ -12,9 +12,15 @@ class ControladorCargo{
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevCargo"])){
 
-				$tabla = "Tap_Cargo";
+				$tabla = "tap_cargo";
 
-				$datos = $_POST["nuevCargo"];
+				date_default_timezone_set('America/Lima');
+
+				$fecha = date('d-m-Y');
+
+				$datos = array("nombre"=>$_POST["nuevCargo"],
+								"fecha_registro"=>$fecha
+								);
 
 				$respuesta = ModeloCargo::mdlIngresarCargo($tabla, $datos);
 
@@ -73,7 +79,7 @@ class ControladorCargo{
 
 	static public function ctrMostrarCargo($item, $valor){
 
-		$tabla = "Tap_Cargo";
+		$tabla = "tap_cargo";
 
 		$respuesta = ModeloCargo::mdlMostrarCargo($tabla, $item, $valor);
 
@@ -91,7 +97,7 @@ class ControladorCargo{
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCargo"])){
 
-				$tabla = "Tap_Cargo";
+				$tabla = "tap_cargo";
 
 				$datos = array("nombre"=>$_POST["editarCargo"],
 							   "id"=>$_POST["idCargo"]);
@@ -153,7 +159,7 @@ class ControladorCargo{
 
 		if(isset($_GET["idCargo"])){
 
-			$tabla ="Tap_Cargo";
+			$tabla ="tap_cargo";
 			$datos = $_GET["idCargo"];
 
 			$respuesta = ModeloCargo::mdlBorrarCargo($tabla, $datos);

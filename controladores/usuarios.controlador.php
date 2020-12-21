@@ -28,6 +28,7 @@ class ControladorUsuarios
                 $respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
 
 
+               
 
 
 
@@ -44,6 +45,8 @@ class ControladorUsuarios
                         $_SESSION["usuario"] = $respuesta["usuario"];
                         $_SESSION["foto"] = $respuesta["foto"];
                         $_SESSION["roles"] = $respuesta["roles"];
+                        $_SESSION["estado_voto"] = $respuesta["estado_voto"];
+
 
                         /* =============================================
                           REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
@@ -63,6 +66,8 @@ class ControladorUsuarios
                         $valor2 = $respuesta["id"];
 
                         $ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+
+
 
                         if ($ultimoLogin == "ok") {
 
@@ -112,30 +117,28 @@ class ControladorUsuarios
 
                 if (isset($_FILES["nuevaFoto"]["tmp_name"])) {
 
-
                     list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
-
 
                     $nuevoAncho = 500;
                     $nuevoAlto = 500;
 
-                    /*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-					=============================================*/
+                    /* =============================================
+                        CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+                        ============================================= */
 
                     $directorio = "vistas/img/usuarios/" . $_POST["nuevUsuario"];
 
                     mkdir($directorio, 0755);
 
-                    /*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-					=============================================*/
+                    /* =============================================
+                        DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+                        ============================================= */
 
                     if ($_FILES["nuevaFoto"]["type"] == "image/jpeg") {
 
-                        /*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
+                        /* =============================================
+                            GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                            ============================================= */
 
                         $aleatorio = mt_rand(100, 999);
 
@@ -152,9 +155,9 @@ class ControladorUsuarios
 
                     if ($_FILES["nuevaFoto"]["type"] == "image/png") {
 
-                        /*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
+                        /* =============================================
+                            GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                            ============================================= */
 
                         $aleatorio = mt_rand(100, 999);
 
@@ -274,6 +277,20 @@ class ControladorUsuarios
     }
 
     /* =============================================
+      MOSTRAR USUARIO QUE NO HAN REALIZADO EL VOTO
+      ============================================= */
+
+    static public function ctrMostrarUsuariosNoVoto($item, $item2, $valor)
+    {
+
+        $tabla = "tap_empleado";
+
+        $respuesta = ModeloUsuarios::MdlMostrarUsuariosNoVoto($tabla, $item, $item2, $valor);
+
+        return $respuesta;
+    }
+
+    /* =============================================
       EDITAR USUARIO
       ============================================= */
 
@@ -295,6 +312,7 @@ class ControladorUsuarios
                   ============================================= */
 
                 $ruta = $_POST["fotoActual"];
+
 
                 if (isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])) {
 
@@ -364,6 +382,7 @@ class ControladorUsuarios
                     }
                 }
 
+
                 $tabla = "tap_empleado";
 
                 if ($_POST["editarPassword"] != "") {
@@ -396,6 +415,7 @@ class ControladorUsuarios
                 }
 
 
+
                 $datos = array(
                     "id" => $_POST["editarId"],
                     "dni" => $_POST["editarDni"],
@@ -408,6 +428,7 @@ class ControladorUsuarios
                     "password" => $encriptar,
 
                 );
+                var_dump($datos);
 
                 $respuesta = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
 
@@ -451,6 +472,12 @@ class ControladorUsuarios
             }
         }
     }
+
+
+
+
+
+
 
     /* =============================================
       BORRAR USUARIO

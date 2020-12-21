@@ -29,7 +29,7 @@ class AjaxUsuarios {
 
     public function ajaxActivarUsuario() {
 
-        $tabla = "usuarios";
+        $tabla = "tap_empleado";
 
         $item1 = "estado";
         $valor1 = $this->activarUsuario;

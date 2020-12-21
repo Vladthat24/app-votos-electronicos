@@ -15,7 +15,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link rel="icon" href="vistas/img/plantilla/icono-negro.png">
+  <link rel="icon" href="vistas/img/plantilla/icono_pestaña.png">
 
   <!--=====================================
        PLUGINS DE CSS
@@ -42,6 +42,10 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="vistas/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="vistas/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+
+  <!-- SELECT 2 -->
+  <link rel="stylesheet" href="vistas/bower_components/select2/dist/css/select2.css">
+  <link rel="stylesheet" href="vistas/bower_components/select2/dist/css/select2.min.css">
 
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="vistas/plugins/iCheck/all.css">
@@ -103,6 +107,9 @@
 
   <script src="vistas/push/push.min.js"></script>
 
+  <!-- select 2-->
+  <script src="vistas/bower_components/select2/dist/js/select2.js"></script>
+
 </head>
 
 <!--=====================================
@@ -140,9 +147,9 @@
         $_GET["ruta"] == "roles" ||
         $_GET["ruta"] == "cargo" ||
         $_GET["ruta"] == "lista" ||
-        $_GET["ruta"] == "ticket" ||
+        $_GET["ruta"] == "votar" ||
         $_GET["ruta"] == "reporteticket" ||
-        $_GET["ruta"] == "reporteestadistico" ||
+        $_GET["ruta"] == "listadetalle" ||
         $_GET["ruta"] == "salir"
       ) {
 
@@ -173,12 +180,13 @@
   <script src="vistas/js/plantilla.js"></script>
   <script src="vistas/js/usuarios.js"></script>
   <script src="vistas/js/roles.js"></script>
-  <script src="vistas/js/ticket.js"></script>
+  <script src="vistas/js/votar.js"></script>
   <script src="vistas/js/clientes.js"></script>
   <script src="vistas/js/ventas.js"></script>
   <script src="vistas/js/consultaReniec.js"></script>
-  <script src="vistas/js/soporte.js"></script>
+  <script src="vistas/js/cargo.js"></script>
   <script src="vistas/js/lista.js"></script>
+  <script src="vistas/js/detallelista.js"></script>
   <script src="vistas/js/reporteestadistico.js"></script>
   <script src="vistas/js/notificar.js"></script>
 

@@ -1,26 +1,25 @@
 /*=============================================
- EDITAR LISTADO
- =============================================*/
-$(".tablas").on("click", ".btnEditarLista", function () {
+EDITAR DOCUMENTO
+=============================================*/
+$(".tablas").on("click", ".btnEditarCargo", function() {
 
-    var idLista = $(this).attr("idLista");
+    var idCargo = $(this).attr("idCargo");
 
     var datos = new FormData();
-    datos.append("idLista", idLista);
+    datos.append("idCargo", idCargo);
 
     $.ajax({
-        url: "ajax/lista.ajax.php",
+        url: "ajax/cargo.ajax.php",
         method: "POST",
         data: datos,
         cache: false,
         contentType: false,
         processData: false,
         dataType: "json",
-        success: function (respuesta) {
+        success: function(respuesta) {
 
-            $("#editarNombre").val(respuesta["nombre"]);
-            $("#editarDescripcion").val(respuesta["descripcion"]);
-            $("#editarId").val(respuesta["id"]);
+            $("#editarCargo").val(respuesta["nombre"]);
+            $("#idCargo").val(respuesta["id"]);
 
         }
 
@@ -30,26 +29,26 @@ $(".tablas").on("click", ".btnEditarLista", function () {
 })
 
 /*=============================================
- ELIMINAR LISTADO
- =============================================*/
-$(".tablas").on("click", ".btnEliminarLista", function () {
+ELIMINAR DOCUMENTO
+=============================================*/
+$(".tablas").on("click", ".btnEliminarCargo", function() {
 
-    var idLista = $(this).attr("idLista");
+    var idCargo = $(this).attr("idCargo");
 
     swal({
-        title: '¿Está seguro de borrar la Lista?',
+        title: '¿Está seguro de borrar el Cargo?',
         text: "¡Si no lo está puede cancelar la acción!",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si, borrar Estado!'
-    }).then(function (result) {
+        confirmButtonText: '¡Si, borrar cargo!'
+    }).then(function(result) {
 
         if (result.value) {
 
-            window.location = "index.php?ruta=lista&idLista=" + idLista;
+            window.location = "index.php?ruta=cargo&idCargo=" + idCargo;
 
         }
 

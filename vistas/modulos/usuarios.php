@@ -67,14 +67,14 @@
                     <tbody>
 
                         <?php
-                        if ($_SESSION['roles'] == "ADMINISTRADOR") {
+                        if ($_SESSION['roles'] == "ADMINISTRADOR" || $_SESSION["roles"] == "COMITE ELECTORAL") {
 
                             $item = null;
                             $valor = null;
 
                             $usuarios = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
 
-
+                            /*           var_dump($usuarios); */
 
                             foreach ($usuarios as $key => $value) {
 
@@ -112,11 +112,13 @@
 
                                         <div class="btn-group">
                             
-                                        <button class="btn btn-warning btnEditarUsuario" idUsuario="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+                                        <button class="btn btn-warning btnEditarUsuario" idUsuario="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>';
 
-                                        <button class="btn btn-danger btnEliminarUsuario" idUsuario="' . $value["id"] . '" fotoUsuario="' . $value["foto"] . '" usuario="' . $value["usuario"] . '"><i class="fa fa-times"></i></button>
+                                echo '<button class="btn btn-danger btnEliminarUsuario" idUsuario="' . $value["id"] . '" fotoUsuario="' . $value["foto"] . '" usuario="' . $value["usuario"] . '"><i class="fa fa-times"></i></button>';
 
-                                        </div>  
+
+
+                                echo '</div>  
 
                                     </td>
 
@@ -125,10 +127,11 @@
                         } else {
 
                             $item = null;
-                            $item2 = "datos_completos";
-                            $valor = $_SESSION["datos_completos"];
+                            $item2 = "dni";
+                            $valor = $_SESSION["dni"];
 
                             $usuarios = ControladorUsuarios::ctrMostrarUsuariosPersonal($item, $item2, $valor);
+
 
                             foreach ($usuarios as $key => $value) {
 
@@ -150,7 +153,7 @@
 
 
                                 echo '<td>' . $value["roles"] . '</td>
-                                      <td>' . $values["usuario"] . '</td>';
+                                      <td>' . $value["usuario"] . '</td>';
 
                                 if ($value["estado"] != 0) {
 
@@ -161,7 +164,7 @@
                                 }
 
                                 echo '<td>' . $value["ultimo_login"] . '</td>
-                                      <td>' . $values["fecha_registro"] . '</td>
+                                      <td>' . $value["fecha_registro"] . '</td>
                                
                   <td>
 
@@ -337,11 +340,13 @@ MODAL AGREGAR USUARIO
 
                             <div class="panel">SUBIR FOTO</div>
 
-                            <input type="file" class="nuevaFoto" name="nuevaFoto">
+                            <input type="file" class="nuevaFoto" name="editarFoto">
 
                             <p class="help-block">Peso máximo de la foto 2MB</p>
 
                             <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+
+                            <input type="hidden" name="fotoActual" id="fotoActual">
 
                         </div>
 

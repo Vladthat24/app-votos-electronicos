@@ -4,7 +4,7 @@
 
     <h1>
 
-      Administrar Cargos del Trabajador
+      Administrar Cargo
 
     </h1>
 
@@ -12,7 +12,7 @@
 
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
 
-      <li class="active">Administrar Cargos del Trabajador</li>
+      <li class="active">Administrar Cargo</li>
 
     </ol>
 
@@ -26,7 +26,7 @@
 
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCargo">
 
-          Administrar Cargos del Trabajador
+          Administrar Cargo
 
         </button>
 
@@ -65,7 +65,7 @@
                     <td>' . ($key + 1) . '</td>
 
                     <td class="text-uppercase">' . $value["nombre"] . '</td>
-                    <td class="text-uppercase">' . $value["fecha"] . '</td>
+                    <td class="text-uppercase">' . $value["fecha_registro"] . '</td>
 
                     <td>
 
