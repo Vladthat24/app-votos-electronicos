@@ -45,23 +45,74 @@
             <div class="box-body">
 
                 <?php
-                if (isset($_SESSION["estado_voto"])) {
-
-                    $estado_voto = $_SESSION["estado_voto"];
-
-                    if ($estado_voto == 0) {
-
-                        $item = null;
-                        $valor = null;
-
-                        $Detallelista = ControladorDetalleLista::ctrMostrarDetalleListaVoto($item, $valor);
-
-                        $idLista = $_SESSION["id"];
 
 
-                        foreach ($Detallelista as $key => $value) {
+                date_default_timezone_set('America/Lima');
+                $hora = date("H:i");
+                $dia = date("w");
+           
 
-                            echo '
+                if ($_SESSION["roles"] == "ADMINISTRADOR" || $_SESSION["roles"] == "COMITE ELECTORAL") {
+
+
+                    $item = null;
+                    $valor = null;
+
+                    $Detallelista = ControladorDetalleLista::ctrMostrarDetalleListaVoto($item, $valor);
+
+                    $idLista = $_SESSION["id"];
+
+
+                    foreach ($Detallelista as $key => $value) {
+
+                        echo '
+                            <div class="col-sm-3 col-xs-12">
+
+                                <div class="card" style="width: 50%;">
+                                
+                                    <img class="card-img-top" src="' . $value["foto"] . '" width="160" height="160" style="display:block;margin:auto;">
+                                
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="text-align:center;font-size:36px;">' . $value["lista"] . '</h5>
+                                        <p class="card-text" style="text-align:center;font-weight:bold">' . $value["datos_completos"] . '</p>
+                                        <p class="card-text" style="text-align:center;font-weight:bold">' . $value["descripcion"] . '</p>
+                                        <p class="card-text" style="text-align:center;font-weight:bold"">' . $value["cargo"] . '</p>
+
+                                    </div>
+
+                                    <div class="card-footer" style="margin:10px;">
+                                        <button type="button" class="btn btn-primary btnVotar" idLista="' . $value["idlista"] . '" idUser="' . $idLista . '" style="display:block;margin:auto;">Votar</button>
+                                    </div>
+
+
+                                </div>
+                            </div>';
+                    }
+                } else {
+
+                    if ($hora >= '08:00' && $hora <= '16:30') {
+
+                        if (isset($_SESSION["estado_voto"])) {
+
+                            $estado_voto = $_SESSION["estado_voto"];
+
+
+
+                            if ($estado_voto == 0) {
+
+
+
+                                $item = null;
+                                $valor = null;
+
+                                $Detallelista = ControladorDetalleLista::ctrMostrarDetalleListaVoto($item, $valor);
+
+                                $idLista = $_SESSION["id"];
+
+
+                                foreach ($Detallelista as $key => $value) {
+
+                                    echo '
                                     <div class="col-sm-3 col-xs-12">
 
                                         <div class="card" style="width: 50%;">
@@ -83,23 +134,41 @@
 
                                         </div>
                                     </div>';
+                                }
+                            } else {
+
+                                echo '<script>
+
+                                    swal({
+                                        type: "success",
+                                        title: "Usted ya realizo el voto",
+                                        showConfirmButton: true,
+                                        confirmButtonText: "Cerrar"
+                                        }).then((result) => {
+
+
+                                                
+                                        })
+                            
+                                 </script>';
+                            }
                         }
                     } else {
 
                         echo '<script>
 
-						swal({
-							  type: "success",
-							  title: "Usted ya realizo el voto",
-							  showConfirmButton: true,
-							  confirmButtonText: "Cerrar"
-							  }).then((result) => {
+                    swal({
+                        type: "success",
+                        title: "Se han cerrado las votaciones",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+                        }).then((result) => {
 
 
-									
-                               })
-                  
-						</script>';
+                                
+                        })
+            
+                 </script>';
                     }
                 }
 
@@ -192,11 +261,11 @@ MODAL AGREGAR USUARIO
                                 foreach ($usuarios as $key => $value) {
 
                                     echo ' <tr>
-          <td>' . ($key + 1) . '</td>
-          <td>' . $value["datos_completos"] . '</td>
-          <td>' . $value["dni"] . '</td>
-          <td>' . $value["oficina"] . '</td>
-          <td>' . $value["cargo"] . '</td>';
+                                        <td>' . ($key + 1) . '</td>
+                                        <td>' . $value["datos_completos"] . '</td>
+                                        <td>' . $value["dni"] . '</td>
+                                        <td>' . $value["oficina"] . '</td>
+                                        <td>' . $value["cargo"] . '</td>';
 
                                     if ($value["foto"] != "") {
 
@@ -206,7 +275,7 @@ MODAL AGREGAR USUARIO
                                         echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
                                     }
                                     echo '
-            </tr>';
+                                 </tr>';
                                 }
 
                                 ?>

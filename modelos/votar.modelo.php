@@ -8,7 +8,7 @@ class ModeloVotar
       MOSTRAR TICKET
       ============================================= */
 
-    static public function mdlMostrarTicket($tabla, $item, $valor, $item2, $valor2)
+    static public function mdlMostrarVoto($tabla, $item, $valor)
     {
         //CAPTURAR DATOS PARA EL EDIT EN EL FORMULARIO
         if ($item != null) {
@@ -22,9 +22,7 @@ class ModeloVotar
             return $stmt->fetch();
         } else {
 
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item2 != :$item2 ORDER BY id DESC");
-
-            $stmt->bindParam(":" . $item2, $valor2, PDO::PARAM_INT);
+            $stmt = Conexion::conectar()->prepare("SELECT v.valor as lista,count(*) valor,l.nombre as nombre from $tabla v inner join tap_lista l on v.valor=l.id group by v.valor");
 
             $stmt->execute();
 

@@ -4,6 +4,22 @@ class ControladorVotar
 {
 
   /* =============================================
+      MOSTRAR VOTO
+      ============================================= */
+      static public function ctrMostrarVoto($item, $valor)
+      {
+  
+          $tabla = "tap_votos";
+  
+          $respuesta = ModeloVotar::mdlMostrarVoto($tabla, $item, $valor);
+  
+          return $respuesta;
+      }
+
+
+
+
+  /* =============================================
       CREAR VOTO
       ============================================= */
 
@@ -11,6 +27,7 @@ class ControladorVotar
   {
 
     if (isset($_GET["codigo"]) && isset($_GET["idLista"]) && isset($_GET["idUser"])) {
+
 
 
       //GENERAR LA FECHA Y HORA DEL SISTEMA
@@ -56,6 +73,8 @@ class ControladorVotar
 
         if ($estadoVotar == "ok") {
 
+          session_destroy();
+
           echo '<script>
 
 						swal({
@@ -71,7 +90,7 @@ class ControladorVotar
 										}
                   })
                   
-						</script>';
+            </script>';
         }
       }
     }
