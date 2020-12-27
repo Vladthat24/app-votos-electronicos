@@ -52,7 +52,7 @@
                 $dia = date("w");
            
 
-                if ($_SESSION["roles"] == "ADMINISTRADOR" || $_SESSION["roles"] == "COMITE ELECTORAL") {
+                if ($_SESSION["roles"] == "ADMINISTRADOR") {
 
 
                     $item = null;
