@@ -1,15 +1,22 @@
 <?php
-
-$item = null;
-$valor = null;
-
-$voto = ControladorVotar::ctrMostrarVoto($item, $valor);
-
+//MOSTRAR SOLO AL ADMINISTRADOR
+date_default_timezone_set('America/Lima');
+$hora = date("H:i");
+$dia = date("w");
 
 
-foreach ($voto as $key => $value) {
+if ($_SESSION["roles"] == "ADMINISTRADOR") {
 
-    echo '    
+    $item = null;
+    $valor = null;
+
+    $voto = ControladorVotar::ctrMostrarVoto($item, $valor);
+
+
+
+    foreach ($voto as $key => $value) {
+
+        echo '    
     <div class="col-lg-6 col-xs-6">
 
         <div class="info-box bg-green">
@@ -18,19 +25,19 @@ foreach ($voto as $key => $value) {
 
             <div class="info-box-content">
 
-                <span class="info-box-text">'.$value["nombre"].'</span>
+                <span class="info-box-text">' . $value["nombre"] . '</span>
 
-                <span class="info-box-number">'.$value["valor"].'</span>
+                <span class="info-box-number">' . $value["valor"] . '</span>
 
                 <!-- The progress section is optional -->
                 <div class="progress">
 
-                    <div class="progress-bar" style="width:'.number_format($value["valor"]).'%;"></div>
+                    <div class="progress-bar" style="width:' . number_format($value["valor"]) . '%;"></div>
 
                 </div>
                 <span class="progress-description">
 
-                   '.$value["valor"].' desde el lanzamiento del Sistema.
+                   ' . $value["valor"] . ' desde el lanzamiento del Sistema.
                 </span>
 
             </div>
@@ -38,10 +45,99 @@ foreach ($voto as $key => $value) {
         </div>
 
     </div>';
+    }
+} else if ($_SESSION["roles"] == "COMITE ELECTORAL") {
+
+    if ($hora >= '01:00' && $hora <= '01:20') {
+
+        $item = null;
+        $valor = null;
+
+        $voto = ControladorVotar::ctrMostrarVoto($item, $valor);
+
+
+
+        foreach ($voto as $key => $value) {
+
+            echo '    
+        <div class="col-lg-6 col-xs-6">
+    
+            <div class="info-box bg-green">
+    
+                <span class="info-box-icon"><i class="fa fa-users"></i></span>
+    
+                <div class="info-box-content">
+    
+                    <span class="info-box-text">' . $value["nombre"] . '</span>
+    
+                    <span class="info-box-number">' . $value["valor"] . '</span>
+    
+                    <!-- The progress section is optional -->
+                    <div class="progress">
+    
+                        <div class="progress-bar" style="width:' . number_format($value["valor"]) . '%;"></div>
+    
+                    </div>
+                    <span class="progress-description">
+    
+                       ' . $value["valor"] . ' desde el lanzamiento del Sistema.
+                    </span>
+    
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+    
+        </div>';
+        }
+    }
+} else {
 }
+
 
 ?>
 
+<div class="col-lg-6 col-xs-6">
+
+    <div class="small-box bg-aqua">
+
+        <div class="inner">
+
+            <h2 style="text-align: center">Modulo de Voto</h2>
+
+            <h4 style="text-align: center">Realiza su voto online</h4>
+
+        </div>
+
+        <a href="votar" class="small-box-footer">
+
+            Más info <i class="fa fa-arrow-circle-right"></i>
+
+        </a>
+
+    </div>
+
+</div>
+<div class="col-lg-6 col-xs-6">
+
+    <div class="small-box bg-aqua">
+
+        <div class="inner">
+
+            <h2 style="text-align: center">Modulo de Usuario</h2>
+
+            <h4 style="text-align: center">Cambiar de Contraseña</h4>
+
+        </div>
+
+        <a href="votar" class="small-box-footer">
+
+            Más info <i class="fa fa-arrow-circle-right"></i>
+
+        </a>
+
+    </div>
+
+</div>
 <div class="col-lg-12 col-xs-12">
 
     <div class="small-box bg-aqua">
