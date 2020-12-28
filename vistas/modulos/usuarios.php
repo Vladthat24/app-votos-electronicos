@@ -497,7 +497,7 @@ MODAL EDITAR USUARIO
                         </div>
 
                         <!-- ENTRADA PARA SELECCIONAR SU ROLES -->
-                        <?php if ($_SESSION["roles"] !== "ADMINISTRADOR") { ?>
+                        <?php if ($_SESSION["roles"] == "ADMINISTRADOR") { ?>
                             <div class="form-group">
 
                                 <div class="input-group">

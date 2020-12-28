@@ -50,7 +50,7 @@
                 date_default_timezone_set('America/Lima');
                 $hora = date("H:i");
                 $dia = date("w");
-           
+
 
                 if ($_SESSION["roles"] == "ADMINISTRADOR") {
 
@@ -68,14 +68,21 @@
                         echo '
                             <div class="col-sm-3 col-xs-12">
 
-                                <div class="card" style="width: 50%;">
-                                
-                                    <img class="card-img-top" src="' . $value["foto"] . '" width="160" height="160" style="display:block;margin:auto;">
-                                
-                                    <div class="card-body">
+                                <div class="card" style="width: 50%;">';
+
+                        if ($value["foto"] != "") {
+
+                            echo ' <img class="card-img-top" src="' . $value["foto"] . '" width="160" height="160" style="display:block;margin:auto;">';
+                        } else {
+
+                            echo ' <img class="card-img-top" src="vistas/img/usuarios/default/anonymous.png" width="160" height="160" style="display:block;margin:auto;">';
+                        }
+
+
+                        echo '<div class="card-body">
                                         <h5 class="card-title" style="text-align:center;font-size:36px;">' . $value["lista"] . '</h5>
                                         <p class="card-text" style="text-align:center;font-weight:bold">' . $value["datos_completos"] . '</p>
-                                        <p class="card-text" style="text-align:center;font-weight:bold">' . $value["descripcion"] . '</p>
+                                       
                                         <p class="card-text" style="text-align:center;font-weight:bold"">' . $value["cargo"] . '</p>
 
                                     </div>
@@ -87,10 +94,12 @@
 
                                 </div>
                             </div>';
+
+                      
                     }
                 } else {
 
-                    if ($hora >= '08:00' && $hora <= '16:30') {
+                    if ($hora >= '08:00' && $hora <= '23:50') {
 
                         if (isset($_SESSION["estado_voto"])) {
 
@@ -115,14 +124,20 @@
                                     echo '
                                     <div class="col-sm-3 col-xs-12">
 
-                                        <div class="card" style="width: 50%;">
-                                        
-                                            <img class="card-img-top" src="' . $value["foto"] . '" width="160" height="160" style="display:block;margin:auto;">
-                                        
-                                            <div class="card-body">
+                                        <div class="card" style="width: 50%;">';
+
+                                    if ($value["foto"] != "") {
+
+                                        echo ' <img class="card-img-top" src="' . $value["foto"] . '" width="160" height="160" style="display:block;margin:auto;">';
+                                    } else {
+
+                                        echo ' <img class="card-img-top" src="vistas/img/usuarios/default/anonymous.png" width="160" height="160" style="display:block;margin:auto;">';
+                                    }
+
+                                    echo '<div class="card-body">
                                                 <h5 class="card-title" style="text-align:center;font-size:36px;">' . $value["lista"] . '</h5>
                                                 <p class="card-text" style="text-align:center;font-weight:bold">' . $value["datos_completos"] . '</p>
-                                                <p class="card-text" style="text-align:center;font-weight:bold">' . $value["descripcion"] . '</p>
+                                               
                                                 <p class="card-text" style="text-align:center;font-weight:bold"">' . $value["cargo"] . '</p>
 
                                             </div>
