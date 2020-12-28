@@ -170,6 +170,12 @@
     include "modulos/footer.php";
 
     echo '</div>';
+  } else if (isset($_GET["ruta"])) {
+
+    if ($_GET["ruta"] == "login" || $_GET["ruta"] == "restablecer") {
+
+      include "modulos/" . $_GET["ruta"] . ".php";
+    }
   } else {
 
     include "modulos/login.php";

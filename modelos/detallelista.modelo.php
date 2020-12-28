@@ -95,7 +95,7 @@ class ModeloDetalleLista
 			inner join tap_empleado e on dl.idempleado=e.id
 			inner join tap_lista l on dl.idlista=l.id
 			inner join tap_cargo c on dl.idcargo=c.id
-			order by dl.id desc");
+			group by idlista");
 
 			$stmt->execute();
 

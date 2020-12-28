@@ -6,15 +6,15 @@ class ControladorVotar
   /* =============================================
       MOSTRAR VOTO
       ============================================= */
-      static public function ctrMostrarVoto($item, $valor)
-      {
-  
-          $tabla = "tap_votos";
-  
-          $respuesta = ModeloVotar::mdlMostrarVoto($tabla, $item, $valor);
-  
-          return $respuesta;
-      }
+  static public function ctrMostrarVoto($item, $valor)
+  {
+
+    $tabla = "tap_votos";
+
+    $respuesta = ModeloVotar::mdlMostrarVoto($tabla, $item, $valor);
+
+    return $respuesta;
+  }
 
 
 
@@ -71,7 +71,15 @@ class ControladorVotar
 
         $estadoVotar = ModeloUsuarios::mdlActualizarEstadoVoto($tablaEmpleado, $item1, $valor1, $item2, $valor2);
 
-        if ($estadoVotar == "ok") {
+        $itemCodigo = "codigovoto";
+        $valorCodigo = $codigo;
+
+        $codigoVoto = ModeloUsuarios::mdlActualizarEstadoVoto($tablaEmpleado, $itemCodigo, $valorCodigo, $item2, $valor2);
+
+
+
+        if ($estadoVotar == "ok" && $codigoVoto == "ok") {
+
 
           session_destroy();
 

@@ -15,7 +15,7 @@ class ModeloUsuarios
 
             $stmt = Conexion::conectar()->prepare("SELECT e.id as id,e.datos_completos as datos_completos,e.dni as dni,e.oficina as oficina,e.cargo as cargo,e.foto as foto,
               r.nombre as roles,r.id as idroles,e.usuario as usuario,e.password as password,
-              e.estado as estado,e.ultimo_login as ultima_login,e.fecha_registro as fecha_registro,e.estado_voto as estado_voto FROM $tabla e inner join tap_roles r
+              e.estado as estado,e.ultimo_login as ultima_login,e.fecha_registro as fecha_registro,e.estado_voto as estado_voto,e.estadopassword as estadopassword FROM $tabla e inner join tap_roles r
               on e.idroles=r.id WHERE e.$item = :$item ");
 
             $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
@@ -27,7 +27,7 @@ class ModeloUsuarios
 
             $stmt = Conexion::conectar()->prepare("SELECT e.id as id,e.datos_completos as datos_completos,e.dni as dni,e.oficina as oficina,e.cargo as cargo,e.foto as foto,
               r.nombre as roles,e.usuario as usuario,e.password as password,
-              e.estado as estado,e.ultimo_login as ultimo_login,e.fecha_registro as fecha_registro,e.estado_voto as estado_voto FROM $tabla e inner join tap_roles r
+              e.estado as estado,e.ultimo_login as ultimo_login,e.fecha_registro as fecha_registro,e.estado_voto as estado_voto,e.estadopassword as estadopassword FROM $tabla e inner join tap_roles r
               on e.idroles=r.id  ORDER BY e.id DESC");
 
 
@@ -226,6 +226,32 @@ class ModeloUsuarios
         $stmt = null;
     }
 
+    /* =============================================
+      ACTUALIZAR CONTRASEÑA Y ESTADO DE PASSWORD
+      ============================================= */
+
+    static public function mdlActualizarEstadoPassword($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4)
+    {
+
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1,$item2=:$item2 WHERE $item3= :$item3 and $item4=:$item4");
+
+        $stmt->bindParam(":" . $item1, $valor1, PDO::PARAM_STR);
+        $stmt->bindParam(":" . $item2, $valor2, PDO::PARAM_STR);
+        $stmt->bindParam(":" . $item3, $valor3, PDO::PARAM_STR);
+        $stmt->bindParam(":" . $item4, $valor4, PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 
 
     /* =============================================

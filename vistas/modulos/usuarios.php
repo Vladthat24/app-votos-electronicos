@@ -434,7 +434,7 @@ MODAL EDITAR USUARIO
 
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                                <input type="text" class="form-control input-lx" id="editarDatosCompletos" name="editarDatosCompletos" value="">
+                                <input type="text" class="form-control input-lx" id="editarDatosCompletos" name="editarDatosCompletos" value="" readonly>
 
                             </div>
 
@@ -497,7 +497,7 @@ MODAL EDITAR USUARIO
                         </div>
 
                         <!-- ENTRADA PARA SELECCIONAR SU ROLES -->
-                        <?php if ($_SESSION["roles"] !== "ADMINISTRADOR") { ?>
+                        <?php if ($_SESSION["roles"] == "ADMINISTRADOR") { ?>
                             <div class="form-group">
 
                                 <div class="input-group">

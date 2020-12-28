@@ -7,6 +7,10 @@ $(document).ready(function() {
     $("#editarTrabajadorSearch").select2();
     $("#editarListaSearch").select2();
     $("#editarCargoSearch").select2();
+
+
+
+
 })
 
 

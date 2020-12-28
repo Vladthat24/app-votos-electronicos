@@ -96,15 +96,59 @@ if ($_SESSION["roles"] == "ADMINISTRADOR") {
 
 ?>
 
-<div class="col-lg-6 col-xs-6">
+<div class="col-lg-12 col-xs-12">
+    <a href="votar" style="color: white;">
+        <div class="small-box bg-blue">
 
-    <div class="small-box bg-aqua">
+            <div class="inner">
+
+                <h2 style="text-align: center">MODULO DE VOTO</h2>
+
+                <h2 style="text-align: center"><strong>Ingrese aquí para realizar su voto</strong></h2>
+
+            </div>
+    </a>
+    <a href="votar" class="small-box-footer">
+
+        Más info <i class="fa fa-arrow-circle-right"></i>
+
+    </a>
+
+</div>
+
+</div>
+<div class="col-lg-12 col-xs-12">
+    <a href="usuarios" style="color: white;">
+        <div class="small-box bg-teal">
+
+            <div class="inner">
+
+                <h2 style="text-align: center">MODULO DE USUARIO</h2>
+
+                <h2 style="text-align: center"><strong>Ingrese aquí para cambiar datos de su cuenta</strong></h2>
+
+            </div>
+    </a>
+    <a href="usuarios" class="small-box-footer">
+
+        Más info <i class="fa fa-arrow-circle-right"></i>
+
+    </a>
+
+</div>
+
+</div>
+
+<div class="col-lg-12 col-xs-12">
+
+    <div class="small-box bg-navy">
 
         <div class="inner">
 
-            <h2 style="text-align: center">Modulo de Voto</h2>
+            <h2 style="text-align: center">SUB CAFAE</h2>
 
-            <h4 style="text-align: center">Realiza su voto online</h4>
+            <h2 style="text-align: center">Elecciones de los Representantes de los Trabajadores de la Adminstracion de la Direccion de Redes Integradas de Salud Lima Sur</h2>
+            <h2 style="text-align: center" style="color: red;">SUB COMITÉ DE ADMINISTRADCION DEL FONDO DE ASISTENCIA Y ESTIMULO SUB CAFAE PARA EL PERIODO (2021-2022)</h2>
 
         </div>
 
@@ -117,27 +161,8 @@ if ($_SESSION["roles"] == "ADMINISTRADOR") {
     </div>
 
 </div>
-<div class="col-lg-6 col-xs-6">
 
-    <div class="small-box bg-aqua">
 
-        <div class="inner">
-
-            <h2 style="text-align: center">Modulo de Usuario</h2>
-
-            <h4 style="text-align: center">Cambiar de Contraseña</h4>
-
-        </div>
-
-        <a href="votar" class="small-box-footer">
-
-            Más info <i class="fa fa-arrow-circle-right"></i>
-
-        </a>
-
-    </div>
-
-</div>
 <div class="col-lg-12 col-xs-12">
 
     <div class="small-box bg-aqua">

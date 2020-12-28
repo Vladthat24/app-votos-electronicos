@@ -9,6 +9,7 @@ class ControladorUsuarios
     static public function ctrIngresoUsuario()
     {
 
+
         if (isset($_POST["ingUsuario"])) {
 
             if (
@@ -27,14 +28,15 @@ class ControladorUsuarios
 
                 $respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
 
-
-               
-
-
-
                 if ($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar) {
 
-                    if ($respuesta["estado"] == 1) {
+                    $idEmpleado = $respuesta["id"];
+                    $usuario = $respuesta["usuario"];
+
+
+                    if ($respuesta["estado"] == 1 && $respuesta["estadopassword"] == 1) {
+
+
 
                         $_SESSION["iniciarSesion"] = "ok";
                         $_SESSION["id"] = $respuesta["id"];
@@ -77,10 +79,31 @@ class ControladorUsuarios
 
                                 </script>';
                         }
-                    } else {
+                    } elseif ($respuesta["estadopassword"] == 0) {
 
-                        echo '<br>
-                        <div class="alert alert-danger">El usuario aún no está activado</div>';
+
+
+                        echo '<script>
+
+                        swal({
+    
+                            type: "success",
+                            title: "¡Se debe realizar el cambio de su contraseña!",
+                            showConfirmButton: true,
+                            confirmButtonText: "Cerrar"
+    
+                        }).then(function(result){
+    
+                            if(result.value){
+                            
+                                window.location = "index.php?ruta=restablecer&idTrabajador=' . $idEmpleado . '&usuario=' . $usuario . '";
+    
+                            }
+    
+                        });
+                    
+    
+                        </script>';
                     }
                 } else {
 
@@ -102,8 +125,6 @@ class ControladorUsuarios
             if (
                 preg_match('/^[a-zA-Z0-9]+$/', $_POST["dni"]) &&
                 preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevDatosCompletos"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevOficina"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevCargo"]) &&
                 preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevUsuario"]) &&
                 preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevPassword"])
             ) {
@@ -302,8 +323,6 @@ class ControladorUsuarios
             if (
                 preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarDni"]) &&
                 preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDatosCompletos"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarOficina"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarCargo"]) &&
                 preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarUsuario"]) &&
                 preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarPassword"])
             ) {
@@ -473,8 +492,62 @@ class ControladorUsuarios
         }
     }
 
+    /* =============================================
+    CAMBIAR CONTRASEÑA
+      ============================================= */
+    static public function ctrCambioPassword()
+    {
+
+        if (isset($_POST["idUsuario"]) && isset($_POST["usuario"])) {
+            if (
+                preg_match('/^[a-zA-Z0-9]+$/', $_POST["idUsuario"]) &&
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["usuario"]) &&
+                preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"])
+            ) {
+                var_dump($_POST["idUsuario"], $_POST["usuario"], $_POST["ingPassword"]);
+                $tabla = "tap_empleado";
+                $encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
 
+                $item1 = 'password';
+                $valor1 = $encriptar;
+
+                $item2 = "estadopassword";
+                $valor2 = 1;
+
+                $item3 = "id";
+                $valor3 = $_POST["idUsuario"];
+
+                $item4 = "usuario";
+                $valor4 = $_POST["usuario"];
+
+
+                $estadopassword = ModeloUsuarios::mdlActualizarEstadoPassword($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4);
+
+
+
+                if ($estadopassword == "ok") {
+
+                    echo '<script>
+
+                    swal({
+                          type: "success",
+                          title: "Se realizó el cambio de contraseña",
+                          showConfirmButton: true,
+                          confirmButtonText: "Cerrar"
+                          }).then(function(result){
+                                    if (result.value) {
+    
+                                    window.location = "login";
+    
+                                    }
+                                })
+    
+                    </script>';
+                }
+            }
+        }
+    }
 
 
 
