@@ -1,5 +1,5 @@
 <?php
-
+//MOSTRAR SOLO AL ADMINISTRADOR
 date_default_timezone_set('America/Lima');
 $hora = date("H:i");
 $dia = date("w");
