@@ -17,16 +17,110 @@ class ControladorUsuarios
                 preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["ingPassword"])
             ) {
 
-                $encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-
                 $tabla = "tap_empleado";
 
                 $item = "usuario";
-                //                $item = "nombre";
+
                 $valor = $_POST["ingUsuario"];
 
-
                 $respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
+
+                if ($respuesta["estadopassword"] == 1) {
+
+                    $encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+                    if ($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar) {
+
+
+                        if ($respuesta["estado"] == 1 && $respuesta["estadopassword"] == 1) {
+
+
+
+                            $_SESSION["iniciarSesion"] = "ok";
+                            $_SESSION["id"] = $respuesta["id"];
+                            $_SESSION["dni"] = $respuesta["dni"];
+                            $_SESSION["datos_completos"] = $respuesta["datos_completos"];
+                            $_SESSION["oficina"] = $respuesta["oficina"];
+                            $_SESSION["cargo"] = $respuesta["cargo"];
+                            $_SESSION["usuario"] = $respuesta["usuario"];
+                            $_SESSION["foto"] = $respuesta["foto"];
+                            $_SESSION["roles"] = $respuesta["roles"];
+                            $_SESSION["estado_voto"] = $respuesta["estado_voto"];
+
+
+                            /* =============================================
+                              REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
+                              ============================================= */
+
+                            date_default_timezone_set('America/Bogota');
+
+                            $fecha = date('Y-m-d');
+                            $hora = date('H:i:s');
+
+                            $fechaActual = $fecha . ' ' . $hora;
+
+                            $item1 = "ultimo_login";
+                            $valor1 = $fechaActual;
+
+                            $item2 = "id";
+                            $valor2 = $respuesta["id"];
+
+                            $ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+
+
+
+                            if ($ultimoLogin == "ok") {
+
+                                echo '<script>
+    
+                                            window.location = "inicio";
+    
+                                    </script>';
+                            }
+                        } else {
+
+                            echo '<br><div class="alert alert-danger">Error al ingresar, vuelve a intentarlo</div>';
+                        }
+                    }
+                } else {
+
+                    if ($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $_POST["ingPassword"]) {
+
+                        $idEmpleado = $respuesta["id"];
+                        $usuario = $respuesta["usuario"];
+
+                        echo '<script>
+
+                        swal({
+    
+                            type: "success",
+                            title: "¡Debe realizar el cambio de su contraseña para continuar!",
+                            showConfirmButton: true,
+                            confirmButtonText: "Aceptar"
+    
+                        }).then(function(result){
+    
+                            if(result.value){
+                            
+                                window.location = "index.php?ruta=restablecer&idTrabajador=' . $idEmpleado . '&usuario=' . $usuario . '";
+    
+                            }
+    
+                        });
+                    
+    
+                        </script>';
+                    } else {
+
+                        echo '<br><div class="alert alert-danger">Error al ingresar, vuelve a intentarlo</div>';
+                    }
+                }
+
+
+
+
+                /* 
+
 
                 if ($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar) {
 
@@ -50,9 +144,7 @@ class ControladorUsuarios
                         $_SESSION["estado_voto"] = $respuesta["estado_voto"];
 
 
-                        /* =============================================
-                          REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
-                          ============================================= */
+    
 
                         date_default_timezone_set('America/Bogota');
 
@@ -109,6 +201,9 @@ class ControladorUsuarios
 
                     echo '<br><div class="alert alert-danger">Error al ingresar, vuelve a intentarlo</div>';
                 }
+
+
+   */
             }
         }
     }
@@ -311,20 +406,20 @@ class ControladorUsuarios
         return $respuesta;
     }
 
-        /* ====================================================
+    /* ====================================================
       MOSTRAR REPORTE DE TRABAJADORES QUE NO REALIZARON SU VOTO
       ========================================================= */
 
-      static public function ctrMostrarUsuariosReporte($item,$valor)
-      {
-  
-          $tabla = "tap_empleado";
-  
-          $respuesta = ModeloUsuarios::MdlMostrarUsuariosReporte($tabla, $item, $valor);
-  
-          return $respuesta;
-      }
-  
+    static public function ctrMostrarUsuariosReporte($item, $valor)
+    {
+
+        $tabla = "tap_empleado";
+
+        $respuesta = ModeloUsuarios::MdlMostrarUsuariosReporte($tabla, $item, $valor);
+
+        return $respuesta;
+    }
+
 
     /* =============================================
       EDITAR USUARIO
