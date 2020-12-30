@@ -94,7 +94,7 @@
                     }
                 } else {
 
-                    if ($hora >= '08:00' && $hora <= '23:50') {
+                    if ($hora >= '08:00' && $hora <= '16:00') {
 
                         if (isset($_SESSION["estado_voto"])) {
 

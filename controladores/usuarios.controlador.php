@@ -13,8 +13,8 @@ class ControladorUsuarios
         if (isset($_POST["ingUsuario"])) {
 
             if (
-                preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingUsuario"]) &&
-                preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingPassword"])
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["ingUsuario"]) &&
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["ingPassword"])
             ) {
 
                 $encriptar = crypt($_POST["ingPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
@@ -88,9 +88,9 @@ class ControladorUsuarios
                         swal({
     
                             type: "success",
-                            title: "¡Se debe realizar el cambio de su contraseña!",
+                            title: "¡Debe realizar el cambio de su contraseña para continuar!",
                             showConfirmButton: true,
-                            confirmButtonText: "Cerrar"
+                            confirmButtonText: "Aceptar"
     
                         }).then(function(result){
     
@@ -310,6 +310,21 @@ class ControladorUsuarios
 
         return $respuesta;
     }
+
+        /* ====================================================
+      MOSTRAR REPORTE DE TRABAJADORES QUE NO REALIZARON SU VOTO
+      ========================================================= */
+
+      static public function ctrMostrarUsuariosReporte($item,$valor)
+      {
+  
+          $tabla = "tap_empleado";
+  
+          $respuesta = ModeloUsuarios::MdlMostrarUsuariosReporte($tabla, $item, $valor);
+  
+          return $respuesta;
+      }
+  
 
     /* =============================================
       EDITAR USUARIO
@@ -534,7 +549,7 @@ class ControladorUsuarios
                           type: "success",
                           title: "Se realizó el cambio de contraseña",
                           showConfirmButton: true,
-                          confirmButtonText: "Cerrar"
+                          confirmButtonText: "Continuar"
                           }).then(function(result){
                                     if (result.value) {
     

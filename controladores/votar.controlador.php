@@ -93,7 +93,7 @@ class ControladorVotar
 							  }).then((result) => {
 										if (result.value) {
 
-										window.location = "votar";
+										window.location = "login";
 
 										}
                   })
@@ -113,7 +113,7 @@ class ControladorVotar
 
 
     if (isset($_GET["reporte"])) {
-      echo "PRUEBA";
+
       /*  $tabla = "ticket"; */
 
       if (isset($_GET["fechaInicial"]) && isset($_GET["fechaFinal"])) {
@@ -122,10 +122,9 @@ class ControladorVotar
       } else {
 
         $item = null;
-        $item2 = "estado_voto";
-        $valor = '0';
+        $valor = null;
 
-        $usuarios = ControladorUsuarios::ctrMostrarUsuariosNoVoto($item, $item2, $valor);
+        $usuarios = ControladorUsuarios::ctrMostrarUsuariosReporte($item, $valor);
       }
 
 

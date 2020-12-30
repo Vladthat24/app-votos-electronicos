@@ -1,7 +1,7 @@
 /*=============================================
 SUBIENDO LA FOTO DEL USUARIO
 =============================================*/
-$(".nuevaFoto").change(function() {
+$(".nuevaFoto").change(function () {
 
     var imagen = this.files[0];
 
@@ -36,7 +36,7 @@ $(".nuevaFoto").change(function() {
         var datosImagen = new FileReader;
         datosImagen.readAsDataURL(imagen);
 
-        $(datosImagen).on("load", function(event) {
+        $(datosImagen).on("load", function (event) {
 
             var rutaImagen = event.target.result;
 
@@ -50,7 +50,7 @@ $(".nuevaFoto").change(function() {
 /*=============================================
  EDITAR USUARIO
  =============================================*/
-$(".tablas").on("click", ".btnEditarUsuario", function() {
+$(".tablas").on("click", ".btnEditarUsuario", function () {
 
     var idUsuario = $(this).attr("idUsuario");
 
@@ -66,7 +66,7 @@ $(".tablas").on("click", ".btnEditarUsuario", function() {
         contentType: false,
         processData: false,
         dataType: "json",
-        success: function(respuesta) {
+        success: function (respuesta) {
 
             console.log(respuesta["idroles"]);
 
@@ -100,7 +100,7 @@ $(".tablas").on("click", ".btnEditarUsuario", function() {
 /*=============================================
  ACTIVAR USUARIO
  =============================================*/
-$(".tablas").on("click", ".btnActivar", function() {
+$(".tablas").on("click", ".btnActivar", function () {
 
 
 
@@ -121,7 +121,7 @@ $(".tablas").on("click", ".btnActivar", function() {
         cache: false,
         contentType: false,
         processData: false,
-        success: function(respuesta) {
+        success: function (respuesta) {
 
             if (window.matchMedia("(max-width:767px)").matches) {
 
@@ -129,7 +129,7 @@ $(".tablas").on("click", ".btnActivar", function() {
                     title: "El usuario ha sido actualizado",
                     type: "success",
                     confirmButtonText: "¡Cerrar!"
-                }).then(function(result) {
+                }).then(function (result) {
                     if (result.value) {
 
                         window.location = "usuarios";
@@ -167,7 +167,7 @@ $(".tablas").on("click", ".btnActivar", function() {
  REVISAR SI EL USUARIO YA ESTÁ REGISTRADO
  =============================================*/
 
-$("#nuevoUsuario").change(function() {
+$("#nuevoUsuario").change(function () {
 
     $(".alert").remove();
 
@@ -184,7 +184,7 @@ $("#nuevoUsuario").change(function() {
         contentType: false,
         processData: false,
         dataType: "json",
-        success: function(respuesta) {
+        success: function (respuesta) {
 
             if (respuesta) {
 
@@ -202,7 +202,7 @@ $("#nuevoUsuario").change(function() {
 /*=============================================
  REVISAR SI EL DNI DEL USUARIO YA ESTÁ REGISTRADO
  =============================================*/
-$("#dni").change(function() {
+$("#dni").change(function () {
     //$('#consultar').on('click', function () {
     $(".alert").remove();
 
@@ -218,7 +218,7 @@ $("#dni").change(function() {
         contentType: false,
         processData: false,
         dataType: "json",
-        success: function(respuesta) {
+        success: function (respuesta) {
 
             if (respuesta) {
 
@@ -234,67 +234,67 @@ $("#dni").change(function() {
     })
 });
 
-
-
-//$.ajax({
-//
-//    url: "ajax/usuarios.ajax.php",
-//    success: function (respuesta) {
-//        console.log("respuesta", respuesta);
-//
-//    }
-//
-//});
-
-
-
-
 /*=============================================
  ELIMINAR USUARIO
  =============================================*/
-$(".tablas").on("click", ".btnEliminarUsuario", function() {
+$(".tablas").on("click", ".btnEliminarUsuario", function () {
 
-        var idUsuario = $(this).attr("idUsuario");
-        var fotoUsuario = $(this).attr("fotoUsuario");
-        var usuario = $(this).attr("usuario");
+    var idUsuario = $(this).attr("idUsuario");
+    var fotoUsuario = $(this).attr("fotoUsuario");
+    var usuario = $(this).attr("usuario");
 
-        swal({
-            title: '¿Está seguro de borrar el usuario?',
-            text: "¡Si no lo está puede cancelar la accíón!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            cancelButtonText: 'Cancelar',
-            confirmButtonText: 'Si, borrar usuario!'
-        }).then(function(result) {
+    swal({
+        title: '¿Está seguro de borrar el usuario?',
+        text: "¡Si no lo está puede cancelar la accíón!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, borrar usuario!'
+    }).then(function (result) {
 
-            if (result.value) {
+        if (result.value) {
 
-                window.location = "index.php?ruta=usuarios&idUsuario=" + idUsuario + "&usuario=" + usuario + "&fotoUsuario=" + fotoUsuario;
+            window.location = "index.php?ruta=usuarios&idUsuario=" + idUsuario + "&usuario=" + usuario + "&fotoUsuario=" + fotoUsuario;
 
-            }
-
-        })
+        }
 
     })
-    /*=============================================
-     VALIDAR SOLO NUMERO EN DNI
-     =============================================*/
-$(function() {
-    $(".dni").keydown(function(event) {
+
+})
+/*=============================================
+ VALIDAR SOLO NUMERO EN DNI
+ =============================================*/
+$(function () {
+    $(".dni").keydown(function (event) {
         //alert(event.keyCode);
         if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105) && event.keyCode !== 190 && event.keyCode !== 110 && event.keyCode !== 8 && event.keyCode !== 9) {
             return false;
         }
     });
 });
+
+
+/*=============================================
+ VALIDAR SOLO NUMERO EN DNI
+ =============================================*/
+ $(function () {
+    $(".validarUsuario").keydown(function (event) {
+        //alert(event.keyCode);
+        if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105) && event.keyCode !== 190 && event.keyCode !== 110 && event.keyCode !== 8 && event.keyCode !== 9) {
+            return false;
+        }
+    });
+});
+
+
 /*=============================================
  VALIDAR SOLO NUMERO EN CEL 
  =============================================*/
 //SOLO NUMEROS
-$(function() {
-    $(".celular").keydown(function(event) {
+$(function () {
+    $(".celular").keydown(function (event) {
         //alert(event.keyCode);
         if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105) && event.keyCode !== 190 && event.keyCode !== 110 && event.keyCode !== 8 && event.keyCode !== 9) {
             return false;

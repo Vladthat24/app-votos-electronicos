@@ -155,13 +155,12 @@
                                 echo '<td>' . $value["roles"] . '</td>
                                       <td>' . $value["usuario"] . '</td>';
 
-                                if ($value["estado"] != 0) {
 
-                                    echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="' . $value["id"] . '" estadoUsuario="0">Activado</button></td>';
-                                } else {
 
-                                    echo '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="' . $value["id"] . '" estadoUsuario="1">Desactivado</button></td>';
-                                }
+                                echo '<td><button class="btn btn-success btn-xs">Activado</button></td>';
+
+
+
 
                                 echo '<td>' . $value["ultimo_login"] . '</td>
                                       <td>' . $value["fecha_registro"] . '</td>

@@ -48,7 +48,7 @@ if ($_SESSION["roles"] == "ADMINISTRADOR") {
     }
 } else if ($_SESSION["roles"] == "COMITE ELECTORAL") {
 
-    if ($hora >= '01:00' && $hora <= '01:20') {
+    if ($hora >= '08:00' && $hora <= '16:00') {
 
         $item = null;
         $valor = null;
@@ -102,7 +102,7 @@ if ($_SESSION["roles"] == "ADMINISTRADOR") {
 
             <div class="inner">
 
-                <h2 style="text-align: center">MODULO DE VOTO</h2>
+                <h2 style="text-align: center">VOTO</h2>
 
                 <h2 style="text-align: center"><strong>Ingrese aquí para realizar su voto</strong></h2>
 
@@ -116,8 +116,8 @@ if ($_SESSION["roles"] == "ADMINISTRADOR") {
 
 </div>
 
-</div>
-<div class="col-lg-12 col-xs-12">
+
+<!-- <div class="col-lg-12 col-xs-12">
     <a href="usuarios" style="color: white;">
         <div class="small-box bg-teal">
 
@@ -125,7 +125,7 @@ if ($_SESSION["roles"] == "ADMINISTRADOR") {
 
                 <h2 style="text-align: center">MODULO DE USUARIO</h2>
 
-                <h2 style="text-align: center"><strong>Ingrese aquí para cambiar datos de su cuenta</strong></h2>
+                <h2 style="text-align: center"><strong>Ingrese aquí para verificar datos</strong></h2>
 
             </div>
     </a>
@@ -135,9 +135,7 @@ if ($_SESSION["roles"] == "ADMINISTRADOR") {
 
     </a>
 
-</div>
-
-</div>
+</div> -->
 
 <div class="col-lg-12 col-xs-12">
 
@@ -147,7 +145,7 @@ if ($_SESSION["roles"] == "ADMINISTRADOR") {
 
             <h2 style="text-align: center">SUB CAFAE</h2>
 
-            <h2 style="text-align: center">Elecciones de los Representantes de los Trabajadores de la Adminstracion de la Direccion de Redes Integradas de Salud Lima Sur</h2>
+            <h2 style="text-align: center">Elecciones de los Representantes de los Trabajadores de la Administración de la Dirección de Redes Integradas de Salud Lima Sur</h2>
             <h2 style="text-align: center" style="color: red;">SUB COMITÉ DE ADMINISTRADCION DEL FONDO DE ASISTENCIA Y ESTIMULO SUB CAFAE PARA EL PERIODO (2021-2022)</h2>
 
         </div>

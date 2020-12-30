@@ -110,6 +110,40 @@ class ModeloUsuarios
         $stmt = null;
     }
 
+    /* ================================================
+      REPORTE DE USUARIOS QUE NO REALIZARON EL VOTO
+      ================================================= */
+
+    static public function MdlMostrarUsuariosReporte($tabla, $item, $valor)
+    {
+
+        if ($item != null) {
+
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ");
+
+            $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return $stmt->fetch();
+        } else {
+
+            $stmt = Conexion::conectar()->prepare("SELECT e.id as id,e.datos_completos as datos_completos,e.dni as dni, e.oficina as oficina,e.cargo as cargo,
+            e.foto as foto, r.nombre as roles,e.usuario as usuario,e.password as password,
+            e.estado as estado,e.ultimo_login as ultimo_login,e.fecha_registro as fecha_registro FROM $tabla e inner join tap_roles r
+            on e.idroles=r.id WHERE e.estado_voto=0 and e.usuario!='vblanco' and r.nombre!='ADMINISTRADOR'  ORDER BY e.id DESC");
+
+            $stmt->execute();
+            //
+            return $stmt->fetchAll();
+        }
+
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
     /* =============================================
       REGISTRO DE EMPLEADO QUE SER CARGARA CON LA BASE DE DATOS DE COMPESACIONES
       ============================================= */
