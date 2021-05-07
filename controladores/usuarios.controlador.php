@@ -17,7 +17,7 @@ class ControladorUsuarios
                 preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["ingPassword"])
             ) {
 
-                $tabla = "tap_empleado";
+                $tabla = "tap_acceso";
 
                 $item = "usuario";
 

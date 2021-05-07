@@ -1,11 +1,11 @@
 <div class="content">
     <div class="row">
-        <h1 style="color: white; text-align: center">Plataforma Tecnológica - Votos Online</h1>
-        <h2 style="color: white; text-align: center"><a href="https://www.dirislimasur.gob.pe/">Equipo de Trabajo Funcional Tecnologías de la Información - DIRIS LIMA SUR</a></h2>
+        <h1 style="color: white; text-align: center">SISTEMA DE VOTO ONLINE</h1>
+        
 
         <div class="col-lg-12 col-md-12 col-xs-12">
 
-            <div class="login-box ">
+            <div class="login-box" style="width: 25%;">
 
                 <div class="login-logo">
 
