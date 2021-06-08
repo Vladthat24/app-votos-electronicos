@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2021 a las 22:09:37
+-- Tiempo de generación: 08-06-2021 a las 17:43:00
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.2.25
 
@@ -37,15 +37,15 @@ CREATE TABLE `tap_acceso` (
   `estadopassword` int(11) NOT NULL,
   `ultimo_login` text NOT NULL,
   `fecha_registro` text NOT NULL,
-  `estado_password` int(11) NOT NULL
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tap_acceso`
 --
 
-INSERT INTO `tap_acceso` (`idacceso`, `idempleado`, `idroles`, `usuario`, `password`, `estadopassword`, `ultimo_login`, `fecha_registro`, `estado_password`) VALUES
-(1, 1, 1, '76244566', '$2a$07$asxx54ahjppf45sd87a5auEWCSnPH/Xbie6O7afY7yHh2/xrAP6fO', 1, '2020-12-30 16:06:59', '16/10/2020 12:29', 1);
+INSERT INTO `tap_acceso` (`idacceso`, `idempleado`, `idroles`, `usuario`, `password`, `estadopassword`, `ultimo_login`, `fecha_registro`, `estado`) VALUES
+(1, 1, 1, '76244566', '$2a$07$asxx54ahjppf45sd87a5auCqEMOm1sCRLMMpW8tVIxyp1GD./Wzku', 1, '2021-06-05 15:56:20', '16/10/2020 12:29', 1);
 
 -- --------------------------------------------------------
 
@@ -3633,7 +3633,8 @@ INSERT INTO `tap_lista` (`id`, `nombre`, `descripcion`, `fecha_registro`) VALUES
 (1, 'LISTA EN BLANCO', 'VOTO EN BLANCO', '19-12-2020'),
 (2, 'LISTA 1', 'LISTA 1', '22-12-2020'),
 (3, 'LISTA 2', 'LISTA 2', '22-12-2020'),
-(4, 'LISTA 3', 'LISTA 3', '27-12-2020');
+(4, 'LISTA 3', 'LISTA 3', '27-12-2020'),
+(5, 'FUERZA DE', 'LOS MAGNIFICOS DE LA DIRIS LIMA CENTRO', '22-05-2021');
 
 -- --------------------------------------------------------
 
@@ -6172,7 +6173,7 @@ ALTER TABLE `tap_empleado`
 -- AUTO_INCREMENT de la tabla `tap_lista`
 --
 ALTER TABLE `tap_lista`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tap_roles`
