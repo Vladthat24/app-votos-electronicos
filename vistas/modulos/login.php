@@ -1,7 +1,7 @@
 <div class="content">
     <div class="row">
-        <h1 style="color: white; text-align: center">SISTEMA DE VOTO ONLINE</h1>
-        
+
+
 
         <div class="col-lg-12 col-md-12 col-xs-12">
 
@@ -15,8 +15,8 @@
 
                 <div class="login-box-body">
 
-                    <img src="vistas/img/plantilla/logo-dirisls-bloque.png" class="img-responsive">
-
+                    <img src="vistas/img/plantilla/logo-dirisls-bloque.png" class="img-responsive" width="350px;">
+                    <h1 style="color: #666; text-align: center">Sistema de Voto Online</h1>
                     <p class="login-box-msg" style="font-size: 25px;">Ingresar al sistema</p>
 
                     <form method="post">
@@ -47,8 +47,8 @@
                         </div>
 
                         <?php
-                        $login = new ControladorUsuarios();
-                        $login->ctrIngresoUsuario();
+                        $login = new ControladorAcceso();
+                        $login->ctrIngresoAcceso();
                         ?>
 
                     </form>

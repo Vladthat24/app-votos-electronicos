@@ -1,3 +1,68 @@
+$(document).ready(function () {
+
+    fechaDateRange();
+    
+    fetch_data('no');
+
+    function fetch_data(is_date_search, start_date = '', end_date = '') {
+
+        var dataTable = $('#order_data').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                url: "ajax/datatable-usuarios.ajax.php",
+                type: "POST",
+                data: {
+                    is_date_search: is_date_search, start_date: start_date, end_date: end_date
+                }
+            },
+            
+        });
+    }
+
+    $('#search').click(function () {
+        var start_date = $('#start_date').val();
+        var end_date = $('#end_date').val();
+        if (start_date != '' && end_date != '') {
+            $('#order_data').DataTable().destroy();
+            fetch_data('yes', start_date, end_date);
+        }
+        else {
+            swal({
+                type: "error",
+                title: "¡Ingresa las fechas!",
+                showConfirmButton: true,
+                confirmButtonText: "Cerrar"
+            }).then((result) => {
+                if (result.value) {
+
+                    window.location = "registro";
+
+                }
+            })
+        }
+    });
+
+
+})
+
+
+function fechaDateRange() {
+    $('.input-daterange').datepicker({
+        todayBtn: 'linked',
+        format: "yyyy-mm-dd",
+        autoclose: true
+    });
+}
+
+
+function cargarUsuarios() {
+
+
+
+}
+
 /*=============================================
 SUBIENDO LA FOTO DEL USUARIO
 =============================================*/
@@ -279,7 +344,7 @@ $(function () {
 /*=============================================
  VALIDAR SOLO NUMERO EN DNI
  =============================================*/
- $(function () {
+$(function () {
     $(".validarUsuario").keydown(function (event) {
         //alert(event.keyCode);
         if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105) && event.keyCode !== 190 && event.keyCode !== 110 && event.keyCode !== 8 && event.keyCode !== 9) {

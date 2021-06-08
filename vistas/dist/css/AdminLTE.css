@@ -3394,7 +3394,8 @@ table.text-center th {
 }
 .login-page,
 .register-page {
-  background: linear-gradient(rgba(0,0,0,1), rgba(0,30,50,1));
+  background: linear-gradient(rgb(3, 42, 65), rgb(187, 203, 214));
+
 }
 
 .login-page #back{

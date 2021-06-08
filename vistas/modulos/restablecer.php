@@ -1,8 +1,8 @@
 <?php
 
-if (isset($_GET["idTrabajador"]) && isset($_GET["usuario"])) {
+if (isset($_GET["id"]) && isset($_GET["usuario"])) {
 
-    $id = $_GET["idTrabajador"];
+    $idacceso = $_GET["id"];
     $usuario = $_GET["usuario"];
 }
 
@@ -34,7 +34,7 @@ if (isset($_GET["idTrabajador"]) && isset($_GET["usuario"])) {
 
                             <input type="password" class="form-control" placeholder="Nueva Contraseña" id="ingPassword" name="ingPassword" required>
                             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                            <input type="text" class="hidden" name="idUsuario" value="<?php echo $id; ?>">
+                            <input type="text" class="hidden" name="id" value="<?php echo $idacceso; ?>">
                             <input type="text" class="hidden" name="usuario" value="<?php echo $usuario; ?>">
 
                         </div>
@@ -60,7 +60,7 @@ if (isset($_GET["idTrabajador"]) && isset($_GET["usuario"])) {
 
                         <?php
 
-                        $restablecer = new ControladorUsuarios();
+                        $restablecer = new ControladorAcceso();
                         $restablecer->ctrCambioPassword();
                         ?>
 

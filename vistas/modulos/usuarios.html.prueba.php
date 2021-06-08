@@ -38,25 +38,10 @@
             <?php
             }
             ?>
-            <div class="row">
-
-                <div class="input-daterange" style="margin-left: 5px;">
-                    <div class="col-md-2 col-sm-2" style="margin-bottom: 2px;">
-                        <input type="date" name="start_date" id="start_date" class="form-control"/>
-                    </div>
-                    <div class="col-md-2 col-sm-2" style="margin-bottom: 2px;">
-                        <input type="date" name="end_date" id="end_date" class="form-control" />
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-2" style="margin-bottom: 2px;">
-                    <input type="button" name="search" id="search" value="Search" class="btn btn-info center-block" />
-                </div>
-
-            </div>
 
             <div class="box-body">
 
-                <table class="table table-bordered table-striped dt-responsive tablas" width="100%" id="order_data">
+                <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
 
                     <thead>
 
@@ -67,14 +52,133 @@
                             <th>DNI</th>
                             <th>Oficina</th>
                             <th>Cargo</th>
+                            <th>Foto</th>
+                            <th>Rol</th>
+                            <th>Usuario</th>
+                            <th>Estado</th>
+                            <th>Último login</th>
                             <th>Fecha de Registro</th>
-
+                            <th>Acciones</th>
 
                         </tr>
 
                     </thead>
 
                     <tbody>
+
+                        <?php
+                        if ($_SESSION['roles'] == "ADMINISTRADOR" || $_SESSION["roles"] == "COMITE ELECTORAL") {
+
+                            $item = null;
+                            $valor = null;
+
+                            $usuarios = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+
+                            /*           var_dump($usuarios); */
+
+                            foreach ($usuarios as $key => $value) {
+
+                                echo ' <tr>
+                              <td>' . ($key + 1) . '</td>
+                              <td>' . $value["datos_completos"] . '</td>
+                              <td>' . $value["dni"] . '</td>
+                              <td>' . $value["oficina"] . '</td>
+                              <td>' . $value["cargo"] . '</td>';
+
+                                if ($value["foto"] != "") {
+
+                                    echo '<td><img src="' . $value["foto"] . '" class="img-thumbnail" width="40px"></td>';
+                                } else {
+
+                                    echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
+                                }
+
+
+
+                                echo '<td>' . $value["roles"] . '</td>
+                                      <td>' . $value["usuario"] . '</td>';
+
+                                if ($value["estado"] != 0) {
+
+                                    echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="' . $value["id"] . '" estadoUsuario="0">Activado</button></td>';
+                                } else {
+
+                                    echo '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="' . $value["id"] . '" estadoUsuario="1">Desactivado</button></td>';
+                                }
+
+                                echo '<td>' . $value["ultimo_login"] . '</td>
+                                      <td>' . $value["fecha_registro"] . '</td>
+                                    <td>
+
+                                        <div class="btn-group">
+                            
+                                        <button class="btn btn-warning btnEditarUsuario" idUsuario="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>';
+
+                                echo '<button class="btn btn-danger btnEliminarUsuario" idUsuario="' . $value["id"] . '" fotoUsuario="' . $value["foto"] . '" usuario="' . $value["usuario"] . '"><i class="fa fa-times"></i></button>';
+
+
+
+                                echo '</div>  
+
+                                    </td>
+
+                                </tr>';
+                            }
+                        } else {
+
+                            $item = null;
+                            $item2 = "dni";
+                            $valor = $_SESSION["dni"];
+
+                            $usuarios = ControladorUsuarios::ctrMostrarUsuariosPersonal($item, $item2, $valor);
+
+
+                            foreach ($usuarios as $key => $value) {
+
+                                echo ' <tr>
+                              <td>' . ($key + 1) . '</td>
+                              <td>' . $value["datos_completos"] . '</td>
+                              <td>' . $value["dni"] . '</td>
+                              <td>' . $value["oficina"] . '</td>
+                              <td>' . $value["cargo"] . '</td>';
+
+                                if ($value["foto"] != "") {
+
+                                    echo '<td><img src="' . $value["foto"] . '" class="img-thumbnail" width="40px"></td>';
+                                } else {
+
+                                    echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
+                                }
+
+
+
+                                echo '<td>' . $value["roles"] . '</td>
+                                      <td>' . $value["usuario"] . '</td>';
+
+
+
+                                echo '<td><button class="btn btn-success btn-xs">Activado</button></td>';
+
+
+
+
+                                echo '<td>' . $value["ultimo_login"] . '</td>
+                                      <td>' . $value["fecha_registro"] . '</td>
+                               
+                                <td>
+
+                                    <div class="btn-group">
+                                        
+                                    <button class="btn btn-warning btnEditarUsuario" idUsuario="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+
+                                    </div>  
+
+                                </td>
+
+                                </tr>';
+                            }
+                        }
+                        ?>
 
                     </tbody>
 
@@ -87,8 +191,6 @@
     </section>
 
 </div>
-
-
 
 <!--=====================================
 MODAL AGREGAR USUARIO

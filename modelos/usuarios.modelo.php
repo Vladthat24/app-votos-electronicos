@@ -260,32 +260,7 @@ class ModeloUsuarios
         $stmt = null;
     }
 
-    /* =============================================
-      ACTUALIZAR CONTRASEÑA Y ESTADO DE PASSWORD
-      ============================================= */
 
-    static public function mdlActualizarEstadoPassword($tabla, $item1, $valor1, $item2, $valor2, $item3, $valor3, $item4, $valor4)
-    {
-
-        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1,$item2=:$item2 WHERE $item3= :$item3 and $item4=:$item4");
-
-        $stmt->bindParam(":" . $item1, $valor1, PDO::PARAM_STR);
-        $stmt->bindParam(":" . $item2, $valor2, PDO::PARAM_STR);
-        $stmt->bindParam(":" . $item3, $valor3, PDO::PARAM_STR);
-        $stmt->bindParam(":" . $item4, $valor4, PDO::PARAM_STR);
-
-        if ($stmt->execute()) {
-
-            return "ok";
-        } else {
-
-            return "error";
-        }
-
-        $stmt->close();
-
-        $stmt = null;
-    }
 
 
     /* =============================================
