@@ -13,10 +13,7 @@ class ModeloUsuarios
 
         if ($item != null) {
 
-            $stmt = Conexion::conectar()->prepare("SELECT e.id as id,e.datos_completos as datos_completos,e.dni as dni,e.oficina as oficina,e.cargo as cargo,e.foto as foto,
-              r.nombre as roles,r.id as idroles,e.usuario as usuario,e.password as password,
-              e.estado as estado,e.ultimo_login as ultima_login,e.fecha_registro as fecha_registro,e.estado_voto as estado_voto,e.estadopassword as estadopassword FROM $tabla e inner join tap_roles r
-              on e.idroles=r.id WHERE e.$item = :$item ");
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item ");
 
             $stmt->bindParam(":" . $item, $valor, PDO::PARAM_STR);
 
@@ -25,11 +22,7 @@ class ModeloUsuarios
             return $stmt->fetch();
         } else {
 
-            $stmt = Conexion::conectar()->prepare("SELECT e.id as id,e.datos_completos as datos_completos,e.dni as dni,e.oficina as oficina,e.cargo as cargo,e.foto as foto,
-              r.nombre as roles,e.usuario as usuario,e.password as password,
-              e.estado as estado,e.ultimo_login as ultimo_login,e.fecha_registro as fecha_registro,e.estado_voto as estado_voto,e.estadopassword as estadopassword FROM $tabla e inner join tap_roles r
-              on e.idroles=r.id  ORDER BY e.id DESC");
-
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
 
             $stmt->execute();
             //
@@ -56,11 +49,7 @@ class ModeloUsuarios
             return $stmt->fetch();
         } else {
 
-            $stmt = Conexion::conectar()->prepare("SELECT e.id as id,e.datos_completos as datos_completos,e.dni as dni,
-            e.oficina as oficina,e.cargo as cargo,e.foto as foto,
-            r.nombre as roles,e.usuario as usuario,e.password as password,
-            e.estado as estado,e.ultimo_login as ultimo_login,e.fecha_registro as fecha_registro FROM $tabla e inner join tap_roles r
-            on e.idroles=r.id WHERE e.$item2=:$item2 ORDER BY e.id DESC");
+            $stmt = Conexion::conectar()->prepare("SELECT * WHERE $item2=:$item2 ORDER BY id DESC");
 
             $stmt->bindParam(":" . $item2, $valor, PDO::PARAM_STR);
 
@@ -91,11 +80,7 @@ class ModeloUsuarios
             return $stmt->fetch();
         } else {
 
-            $stmt = Conexion::conectar()->prepare("SELECT e.id as id,e.datos_completos as datos_completos,e.dni as dni,
-            e.oficina as oficina,e.cargo as cargo,e.foto as foto,
-            r.nombre as roles,e.usuario as usuario,e.password as password,
-            e.estado as estado,e.ultimo_login as ultimo_login,e.fecha_registro as fecha_registro FROM $tabla e inner join tap_roles r
-            on e.idroles=r.id WHERE e.$item2=:$item2 ORDER BY e.id DESC");
+            $stmt = Conexion::conectar()->prepare("SELECT * WHERE $item2=:$item2 ORDER BY id DESC");
 
             $stmt->bindParam(":" . $item2, $valor, PDO::PARAM_STR);
 
@@ -128,10 +113,7 @@ class ModeloUsuarios
             return $stmt->fetch();
         } else {
 
-            $stmt = Conexion::conectar()->prepare("SELECT e.id as id,e.datos_completos as datos_completos,e.dni as dni, e.oficina as oficina,e.cargo as cargo,
-            e.foto as foto, r.nombre as roles,e.usuario as usuario,e.password as password,
-            e.estado as estado,e.ultimo_login as ultimo_login,e.fecha_registro as fecha_registro FROM $tabla e inner join tap_roles r
-            on e.idroles=r.id WHERE e.estado_voto=0 and e.usuario!='vblanco' and r.nombre!='ADMINISTRADOR'  ORDER BY e.id DESC");
+            $stmt = Conexion::conectar()->prepare("SELECT * WHERE estado_voto=0 ORDER BY id DESC");
 
             $stmt->execute();
             //
@@ -151,16 +133,13 @@ class ModeloUsuarios
     static public function mdlIngresarUsuario($tabla, $datos)
     {
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(datos_completos,dni,oficina,cargo,foto,idroles,usuario, password,fecha_registro) VALUES (:datos_completos,:dni,:oficina,:cargo,:foto,:idroles,:usuario, :password,:fecha_registro)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(datos_completos,dni,oficina,cargo,foto,fecha_registro) VALUES (:datos_completos,:dni,:oficina,:cargo,:foto,:fecha_registro)");
 
         $stmt->bindParam(":datos_completos", $datos["datos_completos"], PDO::PARAM_STR);
         $stmt->bindParam(":dni", $datos["dni"], PDO::PARAM_STR);
         $stmt->bindParam(":oficina", $datos["oficina"], PDO::PARAM_STR);
         $stmt->bindParam(":cargo", $datos["cargo"], PDO::PARAM_STR);
         $stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
-        $stmt->bindParam(":idroles", $datos["idroles"], PDO::PARAM_INT);
-        $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
-        $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
         $stmt->bindParam(":fecha_registro", $datos["fecha_registro"], PDO::PARAM_STR);
 
 

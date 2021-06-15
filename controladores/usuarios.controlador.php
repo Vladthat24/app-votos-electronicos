@@ -9,13 +9,11 @@ class ControladorUsuarios
     static public function ctrCrearUsuario()
     {
 
-        if (isset($_POST["nuevUsuario"])) {
+        if (isset($_POST["dni"])) {
 
             if (
                 preg_match('/^[a-zA-Z0-9]+$/', $_POST["dni"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevDatosCompletos"]) &&
-                preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevUsuario"]) &&
-                preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevPassword"])
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevDatosCompletos"])
             ) {
 
 
@@ -36,7 +34,7 @@ class ControladorUsuarios
                         CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
                         ============================================= */
 
-                    $directorio = "vistas/img/usuarios/" . $_POST["nuevUsuario"];
+                    $directorio = "vistas/img/usuarios/" . $_POST["dni"];
 
                     mkdir($directorio, 0755);
 
@@ -52,7 +50,7 @@ class ControladorUsuarios
 
                         $aleatorio = mt_rand(100, 999);
 
-                        $ruta = "vistas/img/usuarios/" . $_POST["nuevUsuario"] . "/" . $aleatorio . ".jpg";
+                        $ruta = "vistas/img/usuarios/" . $_POST["dni"] . "/" . $aleatorio . ".jpg";
 
                         $origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
 
@@ -71,7 +69,7 @@ class ControladorUsuarios
 
                         $aleatorio = mt_rand(100, 999);
 
-                        $ruta = "vistas/img/usuarios/" . $_POST["nuevUsuario"] . "/" . $aleatorio . ".png";
+                        $ruta = "vistas/img/usuarios/" . $_POST["dni"] . "/" . $aleatorio . ".png";
 
                         $origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
 
@@ -89,9 +87,6 @@ class ControladorUsuarios
 
                 $fecha = date('d-m-Y');
 
-
-                $encriptar = crypt($_POST["nuevPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-
                 $datos = array(
 
                     "datos_completos" => $_POST["nuevDatosCompletos"],
@@ -99,9 +94,6 @@ class ControladorUsuarios
                     "oficina" => $_POST["nuevOficina"],
                     "cargo" => $_POST["nuevCargo"],
                     "foto" => $ruta,
-                    "idroles" => $_POST["nuevRoles"],
-                    "usuario" => $_POST["nuevUsuario"],
-                    "password" => $encriptar,
                     "fecha_registro" => $fecha
                 );
 
@@ -226,9 +218,7 @@ class ControladorUsuarios
 
             if (
                 preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarDni"]) &&
-                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDatosCompletos"]) &&
-                preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarUsuario"]) &&
-                preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarPassword"])
+                preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarDatosCompletos"])
             ) {
                 /* =============================================
                   VALIDAR IMAGEN

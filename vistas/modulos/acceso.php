@@ -38,28 +38,19 @@
             <?php
             }
             ?>
-            <div class="box-header with-boder">
-                <form class="form-inline" action="">
+            <div class="row">
 
-
-                    <label>Fecha Desde:</label>
-
-                    <input type="date" class="form-control" placeholder="Start" id="start_date" name="fechaI" />
-
-                    <label>Hasta</label>
-
-                    <input type="date" class="form-control" placeholder="End" id="end_date"name="fechaFinal" value="<?php echo date("Y-m-d"); ?>" />
-
-                    <button class="btn btn-primary" name="search" id="search">
-
-                        <span class="glyphicon glyphicon-search"></span>
-
-                    </button>
-                    <!--                     <div class="col-md-2 col-sm-2" style="margin-bottom: 2px;">
-                        <input type="button" name="search" id="search" value="Search" class="btn btn-info center-block" />
-                    </div> -->
-
-                </form>
+                <div class="input-daterange" style="margin-left: 5px;">
+                    <div class="col-md-2 col-sm-2" style="margin-bottom: 2px;">
+                        <input type="date" name="start_date" id="start_date" class="form-control"/>
+                    </div>
+                    <div class="col-md-2 col-sm-2" style="margin-bottom: 2px;">
+                        <input type="date" name="end_date" id="end_date" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2" style="margin-bottom: 2px;">
+                    <input type="button" name="search" id="search" value="Search" class="btn btn-info center-block" />
+                </div>
 
             </div>
 
@@ -154,7 +145,7 @@ MODAL AGREGAR USUARIO
 
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                                <input type="text" class="form-control input-lx nuevDatosCompletos" id="nuevDatosCompletos" name="nuevDatosCompletos" placeholder="Datos Completos" required>
+                                <input type="text" class="form-control input-lx nuevoNombre" id="nuevDatosCompletos" name="nuevDatosCompletos" placeholder="Datos Completos" required>
 
                             </div>
 
@@ -187,13 +178,68 @@ MODAL AGREGAR USUARIO
                         </div>
 
 
+                        <!-- ENTRADA PARA EL USUARIO -->
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+
+                                <input type="text" class="form-control input-lx" name="nuevUsuario" placeholder="Ingresar usuario" id="nuevoUsuario" required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA LA CONTRASEÑA -->
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+
+                                <input type="password" class="form-control input-lx" name="nuevPassword" placeholder="Ingresar contraseña" required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-users"></i></span>
+
+                                <select class="form-control input-lx" name="nuevRoles">
+
+                                    <option value="">Selecionar perfil</option>
+                                    <?php
+                                    $item = null;
+                                    $valor = null;
+
+                                    $roles = ControladorRoles::ctrMostrarRoles($item, $valor);
+
+                                    foreach ($roles as $key => $value) {
+
+                                        echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+
+                            </div>
+
+                        </div>
                         <!-- ENTRADA PARA SUBIR FOTO -->
 
                         <div class="form-group">
 
                             <div class="panel">SUBIR FOTO</div>
 
-                            <input type="file" class="nuevaFoto" name="nuevaFoto">
+                            <input type="file" class="nuevaFoto" name="editarFoto">
 
                             <p class="help-block">Peso máximo de la foto 2MB</p>
 
@@ -317,6 +363,95 @@ MODAL EDITAR USUARIO
                             </div>
 
                         </div>
+
+
+                        <!-- ENTRADA PARA EL USUARIO -->
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+
+                                <input type="text" class="form-control input-lx" id="editarUsuario" name="editarUsuario" value="" readonly>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA LA CONTRASEÑA -->
+
+                        <div class="form-group">
+
+                            <div class="input-group">
+
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+
+                                <input type="password" class="form-control input-lx" name="editarPassword" placeholder="Escriba la nueva contraseña">
+
+                                <input type="hidden" id="passwordActual" name="passwordActual">
+
+                            </div>
+
+                        </div>
+
+                        <!-- ENTRADA PARA SELECCIONAR SU ROLES -->
+                        <?php if ($_SESSION["roles"] == "ADMINISTRADOR") { ?>
+                            <div class="form-group">
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
+
+                                    <select class="form-control input-lx" name="editarRoles">
+
+                                        <option id="editarPerfil"></option>
+                                        <?php
+                                        $item = null;
+                                        $valor = null;
+
+                                        $roles = ControladorRoles::ctrMostrarRoles($item, $valor);
+
+                                        foreach ($roles as $key => $value) {
+
+                                            echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
+                                        }
+                                        ?>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+                        <?php } else { ?>
+                            <div class="form-group hidden">
+
+                                <div class="input-group">
+
+                                    <span class="input-group-addon"><i class="fa fa-users"></i></span>
+
+                                    <select class="form-control input-lx" name="editarRoles">
+
+                                        <option id="editarPerfil"></option>
+                                        <?php
+                                        $item = null;
+                                        $valor = null;
+
+                                        $roles = ControladorRoles::ctrMostrarRoles($item, $valor);
+
+                                        foreach ($roles as $key => $value) {
+
+                                            echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
+                                        }
+                                        ?>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+                        <?php } ?>
+
 
                         <!-- ENTRADA PARA SUBIR FOTO -->
 

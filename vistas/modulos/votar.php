@@ -31,15 +31,15 @@
                     Ver Faltantes de Voto
 
                 </button>
-
-                <a href="vistas/modulos/descargar-reporte.php?reporte=reporte">
-                    <button class="btn btn-success">Descargar Trabajadores que faltan votar</button>
-                </a>';
+';
                 }
 
                 ?>
 
-
+<!-- 
+                <a href="vistas/modulos/descargar-reporte.php?reporte=reporte">
+                    <button class="btn btn-success">Descargar Trabajadores que faltan votar</button>
+                </a> -->
             </div>
 
             <div class="box-body">
