@@ -8,9 +8,6 @@ $(document).ready(function() {
     $("#editarListaSearch").select2();
     $("#editarCargoSearch").select2();
 
-
-
-
 })
 
 

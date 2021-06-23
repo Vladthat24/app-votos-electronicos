@@ -4,7 +4,7 @@
 
         <h1>
 
-            Administrar Colaboradores
+            Administrar Acceso
 
         </h1>
 
@@ -12,7 +12,7 @@
 
             <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
 
-            <li class="active">Administrar Colaboradores</li>
+            <li class="active">Administrar Acceso</li>
 
         </ol>
 
@@ -30,7 +30,7 @@
 
                     <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
 
-                        Agregar usuario
+                        Agregar Acceso
 
                     </button>
 
@@ -42,7 +42,7 @@
 
                 <div class="input-daterange" style="margin-left: 5px;">
                     <div class="col-md-2 col-sm-2" style="margin-bottom: 2px;">
-                        <input type="date" name="start_date" id="start_date" class="form-control"/>
+                        <input type="date" name="start_date" id="start_date" class="form-control" />
                     </div>
                     <div class="col-md-2 col-sm-2" style="margin-bottom: 2px;">
                         <input type="date" name="end_date" id="end_date" class="form-control" />
@@ -56,7 +56,7 @@
 
             <div class="box-body">
 
-                <table class="table table-bordered table-striped dt-responsive" width="100%" id="order_data">
+                <table class="table table-bordered table-striped dt-responsive" width="100%" id="order_data_acceso">
 
                     <thead>
 
@@ -64,13 +64,12 @@
 
                             <th style="width:10px">#</th>
                             <th>Datos Completos</th>
-                            <th>DNI</th>
-                            <th>Oficina</th>
-                            <th>Cargo</th>
-                            <th>Foto</th>
+                            <th>Rol</th>
+                            <th>Usuario</th>
+                            <th>Estado Password</th>
+                            <th>Ultimo Acceso</th>
                             <th>Fecha Registro</th>
-                            <th>Estado del Voto</th>
-                            <th>Codigo Voto</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
 
@@ -93,7 +92,7 @@
 
 
 <!--=====================================
-MODAL AGREGAR USUARIO
+MODAL AGREGAR ACCESO
 ======================================-->
 
 <div id="modalAgregarUsuario" class="modal fade" role="dialog">
@@ -112,7 +111,7 @@ MODAL AGREGAR USUARIO
 
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                    <h4 class="modal-title">Agregar usuario</h4>
+                    <h4 class="modal-title">Agregar Acceso</h4>
 
                 </div>
 
@@ -124,60 +123,36 @@ MODAL AGREGAR USUARIO
 
                     <div class="box-body">
 
-                        <!-- ENTRADA PARA DNI -->
 
-                        <div class="form-group">
-
-                            <div class="input-group ">
-
-                                <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-
-                                <input type="text" class="form-control input-lx dni" maxlength="8" id="dni" name="dni" placeholder="Documento de Identidad" required>
-
-                            </div>
-
-                        </div>
-                        <!-- ENTRADA PARA DATOS COMPLETOS-->
+                        <!-- ENTRADA PARA COLABORADOR-->
 
                         <div class="form-group">
 
                             <div class="input-group">
+
 
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                                <input type="text" class="form-control input-lx nuevoNombre" id="nuevDatosCompletos" name="nuevDatosCompletos" placeholder="Datos Completos" required>
+
+                                <select class="form-control" id="searchColaborador"  name="nuevColaborador" style="width: 100%;">
+                                    <option value="">Selecciona Colaborador</option>
+                                    <?php
+                                    $item = null;
+                                    $valor = null;
+
+                                    $trabajador = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+
+                                    foreach ($trabajador as $key => $value) {
+
+                                        echo '<option value="' . $value["id"] . '">' . $value["datos_completos"] . '</option>';
+                                    }
+                                    ?>
+                                </select>
 
                             </div>
 
 
                         </div>
-                        <!-- ENTRADA PARA OFICINA -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-building"></i></span>
-
-                                <input type="text" class="form-control input-lx" name="nuevOficina" placeholder="Oficina" required>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA CARGO -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
-
-                                <input type="text" class="form-control input-lx" name="nuevCargo" placeholder="Cargo" required>
-
-                            </div>
-
-                        </div>
-
-
                         <!-- ENTRADA PARA EL USUARIO -->
 
                         <div class="form-group">
@@ -231,21 +206,6 @@ MODAL AGREGAR USUARIO
                                 </select>
 
                             </div>
-
-                        </div>
-                        <!-- ENTRADA PARA SUBIR FOTO -->
-
-                        <div class="form-group">
-
-                            <div class="panel">SUBIR FOTO</div>
-
-                            <input type="file" class="nuevaFoto" name="editarFoto">
-
-                            <p class="help-block">Peso máximo de la foto 2MB</p>
-
-                            <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-                            <input type="hidden" name="fotoActual" id="fotoActual">
 
                         </div>
 

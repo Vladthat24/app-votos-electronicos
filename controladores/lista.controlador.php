@@ -33,7 +33,7 @@ class ControladorLista
 
 				$respuesta = ModeloLista::mdlIngresarLista($tabla, $datos);
 
-				var_dump($respuesta);
+
 
 				if ($respuesta == "ok") {
 

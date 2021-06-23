@@ -6,7 +6,7 @@ $(document).ready(function () {
 })
 
 function CargarUsuario() {
-
+    
     fetch_data('no');
 
     function fetch_data(is_date_search, start_date = '', end_date = '') {
@@ -200,14 +200,7 @@ $("#order_data").on("click", ".btnEditarUsuario", function () {
             $("#editarDatosCompletos").val(respuesta["datos_completos"]);
             $("#editarOficina").val(respuesta["oficina"]);
             $("#editarCargo").val(respuesta["cargo"]);
-            $("#editarUsuario").val(respuesta["usuario"]);
-
-            $("#editarPerfil").val(respuesta["idroles"]);
-            $("#editarPerfil").html(respuesta["roles"]);
-
             $("#fotoActual").val(respuesta["foto"]);
-
-            $("#passwordActual").val(respuesta["password"]);
 
             if (respuesta["foto"] != "") {
 

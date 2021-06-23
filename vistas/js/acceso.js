@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    $("#searchRol").select2();
+    $("#searchColaborador").select2();
+
     fechaDateRange();
 
     fetch_data('no');

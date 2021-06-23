@@ -86,14 +86,8 @@ if (mysqli_connect_errno()) {
         } else {
             $sub_array[] = '<td><button class="btn btn-danger btn-xs" estadoVoto="' . $row["estado_voto"] . '">No Sufragado</button></td>';
         }
-
         $sub_array[] = '<td><button class="btn btn-primary btn-xs btnCodigoVoto" style="margin-left:35%;" idUsuarioCodigo="' . $row["id"] . '"><i class="fa fa-eye"></i></button></td>';
-        $sub_array[] = '<td>
-                           <center>
-                                <button class="btn btn-warning btnEditarUsuario" idUsuario="' . $row["id"] . '" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa  fa-pencil"></i></button>
-                                <button class="btn btn-danger btnEliminarUsuario" idUsuario="' . $row["id"] . '" fotoUsuario"' . $row["foto"] . '"><i class="fa fa-times"></i></button>
-                           </center>  
-                       </td>';
+        $sub_array[] = '<td><button class="btn btn-warning btnEditarUsuario" idUsuario="' . $row["id"] . '" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa  fa-pencil"></i></button><button class="btn btn-danger btnEliminarUsuario" idUsuario="' . $row["id"] . '" fotoUsuario"' . $row["foto"] . '"><i class="fa fa-times"></i></button></td>';
         $data[] = $sub_array;
     }
 

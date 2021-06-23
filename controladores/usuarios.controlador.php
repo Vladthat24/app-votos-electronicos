@@ -298,51 +298,15 @@ class ControladorUsuarios
 
                 $tabla = "tap_empleado";
 
-                if ($_POST["editarPassword"] != "") {
-
-                    if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarPassword"])) {
-
-                        $encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-                    } else {
-
-                        echo '<script>
-
-                        swal({
-                                  type: "error",
-                                  title: "¡La contraseña no puede ir vacía o llevar caracteres especiales!",
-                                  showConfirmButton: true,
-                                  confirmButtonText: "Cerrar"
-                                  }).then(function(result){
-                                        if (result.value) {
-
-                                        window.location = "usuarios";
-
-                                        }
-                                })
-
-                        </script>';
-                    }
-                } else {
-
-                    $encriptar = $_POST["passwordActual"];
-                }
-
-
-
                 $datos = array(
                     "id" => $_POST["editarId"],
                     "dni" => $_POST["editarDni"],
                     "datos_completos" => $_POST["editarDatosCompletos"],
                     "oficina" => $_POST["editarOficina"],
                     "cargo" => $_POST["editarCargo"],
-                    "foto" => $ruta,
-                    "idroles" => $_POST["editarRoles"],
-                    "usuario" => $_POST["editarUsuario"],
-                    "password" => $encriptar,
-
+                    "foto" => $ruta
                 );
-                var_dump($datos);
-
+            
                 $respuesta = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
 
                 if ($respuesta == "ok") {

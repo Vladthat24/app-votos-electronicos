@@ -152,6 +152,7 @@
         $_GET["ruta"] == "votar" ||
         $_GET["ruta"] == "reporteticket" ||
         $_GET["ruta"] == "listadetalle" ||
+        $_GET["ruta"] == "acceso" ||
         $_GET["ruta"] == "salir"
       ) {
 
@@ -197,6 +198,7 @@
   <script src="vistas/js/detallelista.js"></script>
   <script src="vistas/js/reporteestadistico.js"></script>
   <script src="vistas/js/notificar.js"></script>
+  <script src="vistas/js/acceso.js"></script>
 
 </body>
 

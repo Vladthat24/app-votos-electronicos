@@ -133,85 +133,92 @@ MODAL AGREGAR DETALLE LISTA
 
           <div class="box-body">
 
-            <!-- ENTRADA PARA EL TRABAJADOR -->
+            <div class="row">
 
-            <div class="form-group">
+              <div class="form-row">
 
-              <div class="input-group">
+                <!-- ENTRADA PARA EL TRABAJADOR -->
 
-                <span class="input-group-addon"><i class="fa fa-th"> Personal:</i></span>
+                <div class="form-group col-md-12">
 
-                <select id="nuevTrabajadorSearch" name="nuevTrabajador" style="width: 100%;">
-                  <option value="">PERSONAL DE SALUD</option>
-                  <?php
-                  $item = null;
-                  $valor = null;
+                  <div class="input-group">
 
-                  $trabajador = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                  foreach ($trabajador as $key => $value) {
+                    <select class="form-contro input-lx" id="nuevTrabajadorSearch" name="nuevTrabajador" style="width: 100%;">
+                      <option value="">PERSONAL DE SALUD</option>
+                      <?php
+                      $item = null;
+                      $valor = null;
 
-                    echo '<option value="' . $value["id"] . '">' . $value["datos_completos"] . '</option>';
-                  }
-                  ?>
-                </select>
+                      $trabajador = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
 
+                      foreach ($trabajador as $key => $value) {
+
+                        echo '<option value="' . $value["id"] . '">' . $value["datos_completos"] . '</option>';
+                      }
+                      ?>
+                    </select>
+
+                  </div>
+
+                </div>
+                <!-- ENTRADA PARA LA LISTA -->
+
+                <div class="form-group col-md-6">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-check-circle"></i></span>
+
+                    <select class="form-control form-control-lg" name="nuevLista" id="nuevListaSearch" style="width: 100%;">
+
+                      <option value="">SELECCIONAR LA LISTA</option>
+
+                      <?php
+                      $item = null;
+                      $valor = null;
+
+                      $lista = ControladorLista::ctrMostrarLista($item, $valor);
+
+                      foreach ($lista as $key => $value) {
+
+                        echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
+                      }
+                      ?>
+                    </select>
+
+                  </div>
+
+                </div>
+                <!-- ENTRADA PARA EL CARGO -->
+
+                <div class="form-group col-md-6">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-check-circle"></i></span>
+
+                    <select name="nuevCargo" id="nuevCargoSearch" style="width: 100%;">
+                      <option value="">SELECCIONAR EL CARGO</option>
+                      <?php
+                      $item = null;
+                      $valor = null;
+
+                      $cargo = ControladorCargo::ctrMostrarCargo($item, $valor);
+
+                      foreach ($cargo as $key => $value) {
+
+                        echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
+                      }
+                      ?>
+                    </select>
+
+                  </div>
+
+                </div>
               </div>
-
             </div>
-            <!-- ENTRADA PARA LA LISTA -->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-th"> Lista:  </i></span>
-
-                <select name="nuevLista" id="nuevListaSearch" style="width: 100%;>
-                  <option value="">SELECCIONAR LA LISTA</option>
-                  <?php
-                  $item = null;
-                  $valor = null;
-
-                  $lista = ControladorLista::ctrMostrarLista($item, $valor);
-
-                  foreach ($lista as $key => $value) {
-
-                    echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
-                  }
-                  ?>
-                </select>
-
-              </div>
-
-            </div>
-            <!-- ENTRADA PARA EL CARGO -->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-th"> Cargo:  </i></span>
-
-                <select name="nuevCargo" id="nuevCargoSearch" style="width: 100%;">
-                  <option value="">SELECCIONAR EL CARGO</option>
-                  <?php
-                  $item = null;
-                  $valor = null;
-
-                  $cargo = ControladorCargo::ctrMostrarCargo($item, $valor);
-
-                  foreach ($cargo as $key => $value) {
-
-                    echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
-                  }
-                  ?>
-                </select>
-
-              </div>
-
-            </div>
-
 
 
           </div>
@@ -278,87 +285,94 @@ MODAL EDITAR DETALLE LISTA
 
           <div class="box-body">
 
+            <div class="row">
+              <div class="form-row">
+
+                <div class="form-group col-md-12">
+
+                  <div class="input-group">
+
+                    <input type="hidden" name="editarId" id="editarId" required>
+
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+
+                    <select class="form-contro input-lx" id="editarTrabajadorSearch" name="editarTrabajador" style="width: 100%;">
+                      <option id="editarTrabajador"></option>
+                      <?php
+                      $item = null;
+                      $valor = null;
+
+                      $trabajador = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+
+                      foreach ($trabajador as $key => $value) {
+
+                        echo '<option value="' . $value["id"] . '">' . $value["datos_completos"] . '</option>';
+                      }
+                      ?>
+                    </select>
+
+                  </div>
+
+                </div>
+                <!-- ENTRADA PARA LA LISTA -->
+
+                <div class="form-group col-md-6">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-check-circle"></i></span>
+
+                    <select name="editarLista" id="editarListaSearch" style="width: 100%;">
+                      <option id="editarLista"></option>
+                      <?php
+                      $item = null;
+                      $valor = null;
+
+                      $lista = ControladorLista::ctrMostrarLista($item, $valor);
+
+                      foreach ($lista as $key => $value) {
+
+                        echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
+                      }
+                      ?>
+                    </select>
+
+                  </div>
+
+                </div>
+                <!-- ENTRADA PARA EL CARGO -->
+
+                <div class="form-group col-md-6">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-check-circle"></i></span>
+
+                    <select name="editarCargo" id="editarCargoSearch" style="width: 100%;">
+                      <option id="editarCargo"></option>
+                      <?php
+                      $item = null;
+                      $valor = null;
+
+                      $cargo = ControladorCargo::ctrMostrarCargo($item, $valor);
+
+                      foreach ($cargo as $key => $value) {
+
+                        echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
+                      }
+                      ?>
+                    </select>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
             <!-- ENTRADA PARA EL TRABAJADOR -->
 
-            <div class="form-group">
 
-              <div class="input-group">
-
-                <input type="hidden" name="editarId" id="editarId" required>
-
-                <span class="input-group-addon"><i class="fa fa-th"> Personal:</i></span>
-
-
-                <select id="editarTrabajadorSearch" name="editarTrabajador" style="width: 100%;">
-                  <option id="editarTrabajador"></option>
-                  <?php
-                  $item = null;
-                  $valor = null;
-
-                  $trabajador = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
-
-                  foreach ($trabajador as $key => $value) {
-
-                    echo '<option value="' . $value["id"] . '">' . $value["datos_completos"] . '</option>';
-                  }
-                  ?>
-                </select>
-
-              </div>
-
-            </div>
-            <!-- ENTRADA PARA LA LISTA -->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-th"> Lista:  </i></span>
-
-                <select name="editarLista" id="editarListaSearch" style="width: 100%;">
-                  <option id="editarLista"></option>
-                  <?php
-                  $item = null;
-                  $valor = null;
-
-                  $lista = ControladorLista::ctrMostrarLista($item, $valor);
-
-                  foreach ($lista as $key => $value) {
-
-                    echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
-                  }
-                  ?>
-                </select>
-
-              </div>
-
-            </div>
-            <!-- ENTRADA PARA EL CARGO -->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-th"> Cargo:  </i></span>
-
-                <select name="editarCargo" id="editarCargoSearch" style="width: 100%;">
-                  <option id="editarCargo"></option>
-                  <?php
-                  $item = null;
-                  $valor = null;
-
-                  $cargo = ControladorCargo::ctrMostrarCargo($item, $valor);
-
-                  foreach ($cargo as $key => $value) {
-
-                    echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
-                  }
-                  ?>
-                </select>
-
-              </div>
-
-            </div>
             <!--=====================================
               PIE DEL MODAL
               ======================================-->

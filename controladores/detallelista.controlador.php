@@ -32,10 +32,11 @@ class ControladorDetalleLista
 					"fecha_registro" => $fecha
 				);
 
+			
 
 				$respuesta = ModeloDetalleLista::mdlIngresarDetalleLista($tabla, $datos);
 
-				var_dump($respuesta);
+
 
 				if ($respuesta == "ok") {
 

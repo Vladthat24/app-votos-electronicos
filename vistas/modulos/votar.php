@@ -36,10 +36,6 @@
 
                 ?>
 
-<!-- 
-                <a href="vistas/modulos/descargar-reporte.php?reporte=reporte">
-                    <button class="btn btn-success">Descargar Trabajadores que faltan votar</button>
-                </a> -->
             </div>
 
             <div class="box-body">
@@ -83,13 +79,16 @@
                                      
 
                                     </div>
-
+                                    <div class="card-footer" style="text-align:center;margin-top:10px;">
+                                    <p> ' . $value["lista"] . '</p>
+                                </div>
                                     <div class="card-footer" style="margin:10px;">
                                         <button type="button" class="btn btn-primary btnVotar" idLista="' . $value["idlista"] . '" idUser="' . $idLista . '" style="display:block;margin:auto;">Votar</button>
                                     </div>
 
 
                                 </div>
+
                             </div>';
                     }
                 } else {
@@ -131,12 +130,9 @@
 
                                     echo '<div class="card-body">
 
-                                            </div>
-
                                             <div class="card-footer" style="margin:10px;">
                                                 <button type="button" class="btn btn-primary btnVotar" idLista="' . $value["idlista"] . '" idUser="' . $idLista . '" style="display:block;margin:auto;">Votar</button>
                                             </div>
-
 
                                         </div>
                                     </div>';
@@ -152,8 +148,7 @@
                                         confirmButtonText: "Cerrar"
                                         }).then((result) => {
 
-
-                                                
+                                          
                                         })
                             
                                  </script>';

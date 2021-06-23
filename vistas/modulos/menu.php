@@ -28,18 +28,29 @@
 
                         </a>
 
-                    </li>
-
+                    </li>     
                     <li>
 
-                    <a href="listadetalle">
+                        <a href="listadetalle">
 
                         <i class="fa fa-list-alt"></i>
                         <span>Lista Detalle</span>
 
-                    </a>
+                        </a>
 
                     </li>
+                    <li>
+
+                        <a href="acceso">
+
+                            <i class="fa fa-user"></i>
+                            <span>Acceso</span>
+
+                        </a>
+
+                     </li>
+
+
 
 
                     <li>
