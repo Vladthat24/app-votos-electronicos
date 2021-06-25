@@ -1,12 +1,7 @@
 $(document).ready(function () {
 
     fechaDateRange();
-    CargarUsuario();
 
-})
-
-function CargarUsuario() {
-    
     fetch_data('no');
 
     function fetch_data(is_date_search, start_date = '', end_date = '') {
@@ -54,9 +49,13 @@ function CargarUsuario() {
         var start_date = $('#start_date').val();
         var end_date = $('#end_date').val();
 
+        console.log("Fecha del Jquery: ", start_date, end_date);
+
         if (start_date != '' && end_date != '') {
+
             $('#order_data').DataTable().destroy();
             fetch_data('yes', start_date, end_date);
+            console.log("Se envio con fechas");
         }
         else {
             swal({
@@ -73,7 +72,9 @@ function CargarUsuario() {
             })
         }
     });
-}
+
+})
+
 
 function fechaDateRange() {
     $('.input-daterange').datepicker({

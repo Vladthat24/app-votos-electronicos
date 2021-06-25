@@ -23,13 +23,16 @@ class ControladorDetalleLista
 
 				date_default_timezone_set('America/Lima');
 
-				$fecha = date('d-m-Y');
+				$fecha = date('Y-m-d');
+				$hora = date('H:i:s');
+
+				$fechaActual = $fecha . ' ' . $hora;
 
 				$datos = array(
 					"idempleado" => $_POST["nuevTrabajador"],
 					"idlista" => $_POST["nuevLista"],
 					"idcargo" => $_POST["nuevCargo"],
-					"fecha_registro" => $fecha
+					"fecha_registro" => $fechaActual
 				);
 
 			

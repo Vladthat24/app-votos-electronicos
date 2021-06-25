@@ -7,8 +7,17 @@ if (mysqli_connect_errno()) {
     var_dump("error en la conexion " . mysqli_connect_error());
 } else {
 
+    if (isset($_POST["start_date"]) && isset($_POST["end_date"])) {
+
+        var_dump($_POST["start_date"], $_POST["end_date"]);
+    } else {
+
+        var_dump("no existen las fechas");
+    }
+
     $d1 = DateTime::createFromFormat('Y-m-d', $_POST["start_date"]);
     $d2 = DateTime::createFromFormat('Y-m-d', $_POST["end_date"]);
+
 
     $columns = array('id', 'datos_completos', 'dni', 'oficina', 'cargo', 'foto', 'fecha_registro', 'estado_voto', 'codigovoto');
 
@@ -19,12 +28,8 @@ if (mysqli_connect_errno()) {
         $fecha_inicial = $d1->format('d/m/Y');
         $fecha_final = $d2->format("d/m/Y");
 
-        var_dump($fecha_inicial, $fecha_final);
-
         $query .= "FORMAT(CONVERT(date,fecha_ingreso),'dd/MM/yyyy')  BETWEEN '" . $fecha_inicial . "' AND '" . $fecha_final . "' AND ";
     }
-
-
 
     if (isset($_POST["search"]["value"])) {
         $query .= '
@@ -39,7 +44,7 @@ if (mysqli_connect_errno()) {
             OR codigovoto LIKE "%' . $_POST["search"]["value"] . '%")
                 ';
     }
-   
+
     if (isset($_POST["order"])) {
         $query .= 'ORDER BY ' . $columns[$_POST['order']['0']['column']] . ' ' . $_POST['order']['0']['dir'] . ' 
  ';
@@ -59,7 +64,7 @@ if (mysqli_connect_errno()) {
 
     $result = mysqli_query($connect, $query . $query1);
 
-
+    var_dump($query . $query1);
 
     $data = array();
 
@@ -104,7 +109,6 @@ if (mysqli_connect_errno()) {
         "recordsFiltered" => $number_filter_row,
         "data"    => $data
     );
-
 
     echo json_encode($output);
 }

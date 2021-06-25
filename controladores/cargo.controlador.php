@@ -16,7 +16,7 @@ class ControladorCargo{
 
 				date_default_timezone_set('America/Lima');
 
-				$fecha = date('d-m-Y');
+				$fecha = date('d/m/Y');
 
 				$datos = array("nombre"=>$_POST["nuevCargo"],
 								"fecha_registro"=>$fecha

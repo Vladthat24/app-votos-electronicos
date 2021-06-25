@@ -85,8 +85,11 @@ class ControladorUsuarios
 
                 date_default_timezone_set('America/Lima');
 
-                $fecha = date('d-m-Y');
+                $fecha = date('Y-m-d');
+                $hora = date('H:i:s');
 
+                $fechaActual = $fecha . ' ' . $hora;
+                
                 $datos = array(
 
                     "datos_completos" => $_POST["nuevDatosCompletos"],
@@ -94,7 +97,7 @@ class ControladorUsuarios
                     "oficina" => $_POST["nuevOficina"],
                     "cargo" => $_POST["nuevCargo"],
                     "foto" => $ruta,
-                    "fecha_registro" => $fecha
+                    "fecha_registro" => $fechaActual
                 );
 
 

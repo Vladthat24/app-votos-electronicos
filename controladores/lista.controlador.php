@@ -21,13 +21,15 @@ class ControladorLista
 				$tabla = "tap_lista";
 
 				date_default_timezone_set('America/Lima');
+				$fecha = date('Y-m-d');
+				$hora = date('H:i:s');
 
-				$fecha = date('d-m-Y');
+				$fechaActual = $fecha . ' ' . $hora;
 
 				$datos = array(
 					"nombre" => $_POST["nuevNombre"],
 					"descripcion" => $_POST["nuevDescripcion"],
-					"fecha_registro" => $fecha
+					"fecha_registro" => $fechaActual
 				);
 
 
