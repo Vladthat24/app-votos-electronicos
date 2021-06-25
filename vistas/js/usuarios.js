@@ -44,6 +44,7 @@ $(document).ready(function () {
         });
     }
 
+    
     $('#search').click(function () {
 
         var start_date = $('#start_date').val();
