@@ -5,14 +5,14 @@ $connect = mysqli_connect("localhost", "root", "", "gobpedir_votoonline");
 if (mysqli_connect_errno()) {
 
     var_dump("error en la conexion " . mysqli_connect_error());
+    
 } else {
 
     if (isset($_POST["start_date"]) && isset($_POST["end_date"])) {
 
-        var_dump($_POST["start_date"], $_POST["end_date"]);
+   
     } else {
 
-        var_dump("no existen las fechas");
     }
 
     $d1 = DateTime::createFromFormat('Y-m-d', $_POST["start_date"]);
@@ -64,7 +64,7 @@ if (mysqli_connect_errno()) {
 
     $result = mysqli_query($connect, $query . $query1);
 
-    var_dump($query . $query1);
+  /*   var_dump($query . $query1); */
 
     $data = array();
 

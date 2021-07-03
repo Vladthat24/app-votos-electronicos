@@ -185,7 +185,7 @@
   }
   ?>
 
-
+  <script src="vistas/js/acceso.js"></script>
   <script src="vistas/js/plantilla.js"></script>
   <script src="vistas/js/usuarios.js"></script>
   <script src="vistas/js/roles.js"></script>
@@ -197,8 +197,7 @@
   <script src="vistas/js/lista.js"></script>
   <script src="vistas/js/detallelista.js"></script>
   <script src="vistas/js/reporteestadistico.js"></script>
-  <script src="vistas/js/notificar.js"></script>
-  <script src="vistas/js/acceso.js"></script>
+
 
 </body>
 

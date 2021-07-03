@@ -1,8 +1,9 @@
 <?php
 
+require_once "conexion.php";
+
 class ModeloAcceso
 {
-
 
     static public function mdlMostrarAcceso($tabla, $item, $valor)
     {
@@ -71,18 +72,73 @@ class ModeloAcceso
       REGISTRO DE EMPLEADO QUE SER CARGARA CON LA BASE DE DATOS DE COMPESACIONES
       ============================================= */
 
-    static public function mdlIngresarUsuario($tabla, $datos)
+    static public function mdlIngresarAcceso($tabla, $datos)
     {
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idempleado,idroles,usuario,password,estadopassword,fecha_registro) VALUES (:datos_completos,:dni,:oficina,:cargo,:foto,:fecha_registro)");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(idempleado,idroles,usuario,password,fecha_registro) VALUES (:idempleado,:idroles,:usuario,:password,:fecha_registro)");
 
-        $stmt->bindParam(":datos_completos", $datos["datos_completos"], PDO::PARAM_STR);
-        $stmt->bindParam(":dni", $datos["dni"], PDO::PARAM_STR);
-        $stmt->bindParam(":oficina", $datos["oficina"], PDO::PARAM_STR);
-        $stmt->bindParam(":cargo", $datos["cargo"], PDO::PARAM_STR);
-        $stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
+        $stmt->bindParam(":idempleado", $datos["idempleado"], PDO::PARAM_INT);
+        $stmt->bindParam(":idroles", $datos["idroles"], PDO::PARAM_INT);
+        $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
+        $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
         $stmt->bindParam(":fecha_registro", $datos["fecha_registro"], PDO::PARAM_STR);
 
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
+
+
+        /* =============================================
+      EDITAR ACCESO
+      ============================================= */
+
+      static public function mdlEditarAcceso($tabla, $datos)
+      {
+  
+          $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET idroles = :idroles,usuario= :usuario,password=:password WHERE idacceso = :idacceso");
+  
+  
+          $stmt->bindParam(":idroles", $datos["idroles"], PDO::PARAM_INT);
+          $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
+          $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
+          $stmt->bindParam(":idacceso", $datos["idacceso"], PDO::PARAM_INT);
+
+  
+          if ($stmt->execute()) {
+  
+              return "ok";
+          } else {
+  
+              return "error";
+          }
+  
+          $stmt->close();
+  
+          $stmt = null;
+      }
+
+
+
+          /* =============================================
+      BORRAR ACCESO
+      ============================================= */
+
+    static public function mdlBorrarAcceso($tabla, $datos)
+    {
+
+        $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idacceso = :idacceso");
+
+        $stmt->bindParam(":idacceso", $datos, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
 

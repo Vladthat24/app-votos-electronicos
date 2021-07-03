@@ -2,6 +2,16 @@
 
 class ControladorAcceso
 {
+
+    static public function ctrMostrarAcceso($item, $valor)
+    {
+
+        $tabla = "tap_acceso";
+
+        $respuesta = ModeloAcceso::MdlMostrarAcceso($tabla, $item, $valor);
+
+        return $respuesta;
+    }
     /* =============================================
       INGRESO DE USUARIO
       ============================================= */
@@ -182,4 +192,267 @@ class ControladorAcceso
             }
         }
     }
+
+    /* =============================================
+      REGISTRO DE USUARIO
+      ============================================= */
+
+      static public function ctrCrearAcceso()
+      {
+  
+          if (isset($_POST["nuevUsuario"])) {
+  
+              if (
+                  preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevUsuario"]) &&
+                  preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevPassword"])
+              ) {
+  
+ 
+                  $tabla = "tap_acceso";
+  
+                  date_default_timezone_set('America/Lima');
+  
+                  $fecha = date('Y-m-d');
+                  $hora = date('H:i:s');
+  
+                  $fechaActual = $fecha . ' ' . $hora;
+                  $encriptar = crypt($_POST["nuevPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+                  $datos = array(
+  
+                      "idempleado" => $_POST["nuevColaborador"],
+                      "idroles" => $_POST["nuevRoles"],
+                      "usuario" => $_POST["nuevUsuario"],
+                      "password" => $encriptar,
+                      "fecha_registro" => $fechaActual
+                  );
+  
+  
+  
+                  $respuesta = ModeloAcceso::mdlIngresarAcceso($tabla, $datos);
+  
+  
+                  if ($respuesta == "ok") {
+  
+                      echo '<script>
+  
+                      swal({
+  
+                          type: "success",
+                          title: "¡El Acceso ha sido guardado correctamente!",
+                          showConfirmButton: true,
+                          confirmButtonText: "Cerrar"
+  
+                      }).then(function(result){
+  
+                          if(result.value){
+                          
+                              window.location = "acceso";
+  
+                          }
+  
+                      });
+                  
+  
+                      </script>';
+                  }
+              } else {
+  
+                  echo '<script>
+  
+                      swal({
+  
+                          type: "error",
+                          title: "¡El Acceso no puede ir vacío o llevar caracteres especiales!",
+                          showConfirmButton: true,
+                          confirmButtonText: "Cerrar"
+  
+                      }).then(function(result){
+  
+                          if(result.value){
+                          
+                          window.location = "acceso";
+  
+                          }
+  
+                      });
+                  
+  
+                  </script>';
+              }
+          }
+      }
+
+    /* =============================================
+      REGISTRO DE USUARIO
+      ============================================= */
+
+      static public function ctrEditarAcceso()
+      {
+  
+          if (isset($_POST["editarId"])) {
+  
+              if (
+                  preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarUsuario"]) &&
+                  preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarPassword"])
+              ) {
+  
+ 
+                  $tabla = "tap_acceso";
+  
+                  date_default_timezone_set('America/Lima');
+  
+                  $fecha = date('Y-m-d');
+                  $hora = date('H:i:s');
+  
+                  $fechaActual = $fecha . ' ' . $hora;
+
+                  if ($_POST["editarPassword"] != "") {
+
+                    if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["editarPassword"])) {
+
+                        $encriptar = crypt($_POST["editarPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+                    } else {
+
+                        echo '<script>
+
+                        swal({
+                                  type: "error",
+                                  title: "¡La contraseña no puede ir vacía o llevar caracteres especiales!",
+                                  showConfirmButton: true,
+                                  confirmButtonText: "Cerrar"
+                                  }).then(function(result){
+                                        if (result.value) {
+
+                                        window.location = "acceso";
+
+                                        }
+                                })
+
+                        </script>';
+                    }
+                } else {
+
+                    $encriptar = $_POST["passwordActual"];
+                }                  
+                 
+
+
+                  $datos = array(
+  
+                      "idacceso" => $_POST["editarId"],
+                      "idroles" => $_POST["editarRoles"],
+                      "usuario" => $_POST["editarUsuario"],
+                      "password" => $encriptar,
+                  );
+  
+  
+  
+                  $respuesta = ModeloAcceso::mdlEditarAcceso($tabla, $datos);
+  
+  
+                  if ($respuesta == "ok") {
+  
+                      echo '<script>
+  
+                      swal({
+  
+                          type: "success",
+                          title: "¡El Acceso ha sido guardado correctamente!",
+                          showConfirmButton: true,
+                          confirmButtonText: "Cerrar"
+  
+                      }).then(function(result){
+  
+                          if(result.value){
+                          
+                              window.location = "acceso";
+  
+                          }
+  
+                      });
+                  
+  
+                      </script>';
+                  }
+              } else {
+  
+                  echo '<script>
+  
+                      swal({
+  
+                          type: "error",
+                          title: "¡El Acceso no puede ir vacío o llevar caracteres especiales!",
+                          showConfirmButton: true,
+                          confirmButtonText: "Cerrar"
+  
+                      }).then(function(result){
+  
+                          if(result.value){
+                          
+                          window.location = "acceso";
+  
+                          }
+  
+                      });
+                  
+  
+                  </script>';
+              }
+          }
+      }
+
+    /* =============================================
+      BORRAR ACCESO
+      ============================================= */
+
+      static public function ctrBorrarAcceso()
+      {
+  
+          if (isset($_GET["idAcceso"])) {
+  
+              $tabla = "tap_acceso";
+              $datos = $_GET["idAcceso"];
+  
+            
+              $respuesta = ModeloAcceso::mdlBorrarAcceso($tabla, $datos);
+  
+              if ($respuesta == "ok") {
+  
+                  echo '<script>
+  
+                  swal({
+                        type: "success",
+                        title: "El Acceso ha sido borrado correctamente",
+                        showConfirmButton: true,
+                        confirmButtonText: "Cerrar"
+                        }).then(function(result){
+                                  if (result.value) {
+  
+                                  window.location = "acceso";
+  
+                                  }
+                              })
+  
+                  </script>';
+              }else{
+                echo '<script>
+
+					swal({
+						  type: "error",
+						  title: "¡Erro al eliminar Acceso!",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+                                                        
+						
+
+							}
+						})
+
+			  	</script>';
+              }
+          }
+      }
+
 }

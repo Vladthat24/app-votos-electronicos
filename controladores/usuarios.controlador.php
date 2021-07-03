@@ -89,14 +89,14 @@ class ControladorUsuarios
                 $hora = date('H:i:s');
 
                 $fechaActual = $fecha . ' ' . $hora;
-                
+                $encriptar = crypt($_POST["nuevPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
                 $datos = array(
 
                     "datos_completos" => $_POST["nuevDatosCompletos"],
                     "dni" => $_POST["dni"],
                     "oficina" => $_POST["nuevOficina"],
                     "cargo" => $_POST["nuevCargo"],
-                    "foto" => $ruta,
+                    "foto" => $encriptar,
                     "fecha_registro" => $fechaActual
                 );
 

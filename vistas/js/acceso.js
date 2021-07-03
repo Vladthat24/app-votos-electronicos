@@ -1,27 +1,90 @@
 $(document).ready(function () {
-
-    $("#searchRol").select2();
-    $("#searchColaborador").select2();
-
-    fechaDateRange();
-
+    $("#searchColaboradorAcceso").select2();
 })
 
 
-function fechaDateRange() {
+/* fetch_data_Acceso('no');
+
+function fetch_data_Acceso(is_date_searchAcceso, is_date_searchAcceso = '', end_dateAcceso = '') {
+
+    var dataTable_acceso = $('#order_data_acceso').DataTable({
+        "language": {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        },
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            url: "ajax/datatable-ventas.ajax.php",
+            type: "POST",
+            data: {
+                is_date_searchAcceso: is_date_searchAcceso, start_dateAcceso: start_dateAcceso, end_dateAcceso: end_dateAcceso
+            }
+        }
+
+    });
+}
+
+
+$('#searchAcceso').click(function () {
+
+    var start_dateAcceso = $('#start_dateAcceso').val();
+    var end_dateAcceso = $('#end_dateAcceso').val();
+
+    console.log("Fecha del Jquery: ", start_dateAcceso, end_dateAcceso);
+
+    if (start_dateAcceso != '' && end_dateAcceso != '') {
+
+        $('#order_data_acceso').DataTable().destroy();
+        fetch_data('yes', start_dateAcceso, end_dateAcceso);
+        console.log("Se envio con fechas");
+    }
+    else {
+        swal({
+            type: "error",
+            title: "¡Ingresa las fechas!",
+            showConfirmButton: true,
+            confirmButtonText: "Cerrar"
+        }).then((result) => {
+            if (result.value) {
+
+                window.location = "acceso";
+
+            }
+        })
+    }
+}); */
+
+
+
+
+/* function fechaDateRange() {
     $('.input-daterange').datepicker({
         todayBtn: 'linked',
         format: "yyyy-mm-dd",
         autoclose: true
     });
-}
-
-
-function cargarUsuarios() {
-
-
-
-}
+} */
 
 /*=============================================
 SUBIENDO LA FOTO DEL USUARIO
@@ -75,19 +138,19 @@ $(".nuevaFoto").change(function () {
 /*=============================================
  EDITAR USUARIO
  =============================================*/
-$("#order_data").on("click", ".btnEditarUsuario", function () {
+$("#order_data_acceso").on("click", ".btnEditarAcceso", function () {
 
-    var idUsuario = $(this).attr("idUsuario");
+    var idAcceso = $(this).attr("idAcceso");
 
-    console.log("Usuario: ", idUsuario);
+    console.log("Acceso: ", idAcceso);
 
 
     var datos = new FormData();
-    datos.append("idUsuario", idUsuario);
+    datos.append("idAcceso", idAcceso);
 
     $.ajax({
 
-        url: "ajax/usuarios.ajax.php",
+        url: "ajax/acceso.ajax.php",
         method: "POST",
         data: datos,
         cache: false,
@@ -100,24 +163,12 @@ $("#order_data").on("click", ".btnEditarUsuario", function () {
 
 
             $("#editarId").val(respuesta["id"]);
-            $("#editarDni").val(respuesta["dni"]);
             $("#editarDatosCompletos").val(respuesta["datos_completos"]);
-            $("#editarOficina").val(respuesta["oficina"]);
-            $("#editarCargo").val(respuesta["cargo"]);
             $("#editarUsuario").val(respuesta["usuario"]);
-
             $("#editarPerfil").val(respuesta["idroles"]);
             $("#editarPerfil").html(respuesta["roles"]);
 
-            $("#fotoActual").val(respuesta["foto"]);
-
             $("#passwordActual").val(respuesta["password"]);
-
-            if (respuesta["foto"] != "") {
-
-                $(".previsualizar").attr("src", respuesta["foto"]);
-
-            }
 
         }
 
@@ -265,11 +316,9 @@ $("#dni").change(function () {
 /*=============================================
  ELIMINAR USUARIO
  =============================================*/
-$("#order_data").on("click", ".btnEliminarUsuario", function () {
+$("#order_data_acceso").on("click", ".btnEliminarAcceso", function () {
 
-    var idUsuario = $(this).attr("idUsuario");
-    var fotoUsuario = $(this).attr("fotoUsuario");
-    var usuario = $(this).attr("usuario");
+    var idAcceso = $(this).attr("idAcceso");
 
     swal({
         title: '¿Está seguro de borrar el usuario?',
@@ -279,12 +328,12 @@ $("#order_data").on("click", ".btnEliminarUsuario", function () {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Si, borrar usuario!'
+        confirmButtonText: 'Si, borrar Acceso!'
     }).then(function (result) {
 
         if (result.value) {
 
-            window.location = "index.php?ruta=usuarios&idUsuario=" + idUsuario + "&usuario=" + usuario + "&fotoUsuario=" + fotoUsuario;
+            window.location = "index.php?ruta=acceso&idAcceso=" + idAcceso;
 
         }
 

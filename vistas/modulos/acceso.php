@@ -28,7 +28,7 @@
             ?>
                 <div class="box-header with-border">
 
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarAcceso">
 
                         Agregar Acceso
 
@@ -95,7 +95,7 @@
 MODAL AGREGAR ACCESO
 ======================================-->
 
-<div id="modalAgregarUsuario" class="modal fade" role="dialog">
+<div id="modalAgregarAcceso" class="modal fade" role="dialog">
 
     <div class="modal-dialog">
 
@@ -134,7 +134,7 @@ MODAL AGREGAR ACCESO
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
 
-                                <select class="form-control" id="searchColaborador"  name="nuevColaborador" style="width: 100%;">
+                                <select class="form-control" id="searchColaboradorAcceso" name="nuevColaborador" style="width: 100%;">
                                     <option value="">Selecciona Colaborador</option>
                                     <?php
                                     $item = null;
@@ -226,8 +226,8 @@ MODAL AGREGAR ACCESO
                 </div>
 
                 <?php
-                $crearUsuario = new ControladorUsuarios();
-                $crearUsuario->ctrCrearUsuario();
+                $crearAcceso = new ControladorAcceso();
+                $crearAcceso->ctrCrearAcceso();
                 ?>
 
             </form>
@@ -242,7 +242,7 @@ MODAL AGREGAR ACCESO
 MODAL EDITAR USUARIO
 ======================================-->
 
-<div id="modalEditarUsuario" class="modal fade" role="dialog">
+<div id="modalEditarAcceso" class="modal fade" role="dialog">
 
     <div class="modal-dialog">
 
@@ -270,21 +270,6 @@ MODAL EDITAR USUARIO
 
                     <div class="box-body">
 
-
-                        <!-- ENTRADA PARA DNI -->
-
-                        <div class="form-group">
-
-                            <div class="input-group ">
-
-                                <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-
-                                <input type="text" class="form-control input-lx" maxlength="8" id="editarDni" name="editarDni" value="" readonly>
-                                <input type="text" class="from-control input-lx hidden" id="editarId" name="editarId">
-                            </div>
-
-                        </div>
-
                         <!-- ENTRADA PARA LOS DATOS COMPLETOS -->
 
                         <div class="form-group">
@@ -294,31 +279,7 @@ MODAL EDITAR USUARIO
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
                                 <input type="text" class="form-control input-lx" id="editarDatosCompletos" name="editarDatosCompletos" value="" readonly>
-
-                            </div>
-
-                        </div>
-                        <!-- ENTRADA PARA OFICINA -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-building"></i></span>
-
-                                <input type="text" class="form-control input-lx" id="editarOficina" name="editarOficina" value="">
-
-                            </div>
-
-                        </div>
-
-                        <!-- ENTRADA PARA CARGO -->
-                        <div class="form-group">
-
-                            <div class="input-group">
-
-                                <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
-
-                                <input type="text" class="form-control input-lx" id="editarCargo" name="editarCargo" required>
+                                <input type="text" class="from-control input-lx hidden" id="editarId" name="editarId">
 
                             </div>
 
@@ -412,23 +373,6 @@ MODAL EDITAR USUARIO
                             </div>
                         <?php } ?>
 
-
-                        <!-- ENTRADA PARA SUBIR FOTO -->
-
-                        <div class="form-group">
-
-                            <div class="panel">SUBIR FOTO</div>
-
-                            <input type="file" class="nuevaFoto" name="editarFoto">
-
-                            <p class="help-block">Peso máximo de la foto 2MB</p>
-
-                            <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-                            <input type="hidden" name="fotoActual" id="fotoActual">
-
-                        </div>
-
                     </div>
 
                 </div>
@@ -441,7 +385,7 @@ MODAL EDITAR USUARIO
 
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-                    <button type="submit" class="btn btn-primary">Modificar usuario</button>
+                    <button type="submit" class="btn btn-primary">Modificar Acceso</button>
 
                 </div>
 
