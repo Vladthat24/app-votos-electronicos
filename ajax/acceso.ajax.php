@@ -3,75 +3,79 @@
 require_once "../controladores/acceso.controlador.php";
 require_once "../modelos/acceso.modelo.php";
 
-class AjaxAcceso {
-    /* =============================================
+class AjaxAcceso
+{
+  /* =============================================
       EDITAR USUARIO
       ============================================= */
 
-    public $idAcceso;
+  public $idAcceso;
 
-    public function ajaxEditarAcceso() {
+  public function ajaxEditarAcceso()
+  {
 
-        $item = "idacceso";
-        $valor = $this->idAcceso;
+    $item = "idacceso";
+    $valor = $this->idAcceso;
 
-        $respuesta = ControladorAcceso::ctrMostrarAcceso($item, $valor);
+    $respuesta = ControladorAcceso::ctrMostrarAcceso($item, $valor);
 
-        echo json_encode($respuesta);
-    }
+    echo json_encode($respuesta);
+  }
 
-    /* =============================================
+  /* =============================================
       ACTIVAR USUARIO
       ============================================= */
 
-    public $activarAcceso;
-    public $activarId;
+  public $activarAcceso;
+  public $activarId;
 
-    public function ajaxActivarAcceso() {
+  public function ajaxActivarAcceso()
+  {
 
-        $tabla = "tap_acceso";
+    $tabla = "tap_acceso";
 
-        $item1 = "estado";
-        $valor1 = $this->activarAcceso;
+    $item1 = "estado";
+    $valor1 = $this->activarAcceso;
 
-        $item2 = "id";
-        $valor2 = $this->activarId;
+    $item2 = "idacceso";
+    $valor2 = $this->activarId;
 
-        $respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
-    }
+    $respuesta = ControladorAcceso::ctrActualizarAcceso($item1, $valor1, $item2, $valor2);
+  }
 
-    /* =============================================
+  /* =============================================
       VALIDAR NO REPETIR USUARIO
       ============================================= */
 
-    public $validarAcceso;
+  public $validarAcceso;
 
-    public function ajaxValidarAcceso() {
+  public function ajaxValidarAcceso()
+  {
 
-        $item = "usuario";
-        $valor = $this->validarAcceso;
+    $item = "usuario";
+    $valor = $this->validarAcceso;
 
-        $respuesta = ControladorAcceso::ctrMostrarAcceso($item, $valor);
+    $respuesta = ControladorAcceso::ctrMostrarAcceso($item, $valor);
 
-        echo json_encode($respuesta);
-    }
+    echo json_encode($respuesta);
+  }
 
-    /* =============================================
+  /* =============================================
       VALIDAR NO REPETIR NOMBRE DEL USUARIO
       ============================================= */
 
-    public $validarDni;
+  public $validarDni;
 
-    public function ajaxValidarDni() {
+  public function ajaxValidarDni()
+  {
 
-        $item = "dni";
-        $valor = $this->validarDni;
+    $item = "dni";
+    $valor = $this->validarDni;
 
-        $respuesta = ControladorAcceso::ctrMostrarAcceso($item, $valor);
+    $respuesta = ControladorAcceso::ctrMostrarAcceso($item, $valor);
 
-        echo json_encode($respuesta);
-    }
-
+    echo json_encode($respuesta);
+  }
 }
 
 /* =============================================
@@ -79,9 +83,9 @@ class AjaxAcceso {
   ============================================= */
 if (isset($_POST["idAcceso"])) {
 
-    $editar = new AjaxAcceso();
-    $editar->idAcceso = $_POST["idAcceso"];
-    $editar->ajaxEditarAcceso();
+  $editar = new AjaxAcceso();
+  $editar->idAcceso = $_POST["idAcceso"];
+  $editar->ajaxEditarAcceso();
 }
 
 /* =============================================
@@ -90,10 +94,10 @@ if (isset($_POST["idAcceso"])) {
 
 if (isset($_POST["activarAcceso"])) {
 
-    $activarAcceso = new AjaxAcceso();
-    $activarAcceso->activarAcceso = $_POST["activarAcceso"];
-    $activarAcceso->activarId = $_POST["activarId"];
-    $activarAcceso->ajaxActivarAcceso();
+  $activarAcceso = new AjaxAcceso();
+  $activarAcceso->activarAcceso = $_POST["activarAcceso"];
+  $activarAcceso->activarId = $_POST["activarId"];
+  $activarAcceso->ajaxActivarAcceso();
 }
 
 /* =============================================
@@ -102,9 +106,9 @@ if (isset($_POST["activarAcceso"])) {
 
 if (isset($_POST["validarAcceso"])) {
 
-    $valAcceso = new AjaxAcceso();
-    $valAcceso->validarUsuario = $_POST["validarAcceso"];
-    $valAcceso->ajaxValidarAcceso();
+  $valAcceso = new AjaxAcceso();
+  $valAcceso->validarUsuario = $_POST["validarAcceso"];
+  $valAcceso->ajaxValidarAcceso();
 }
 /* =============================================
   VALIDAR NO REPETIR NOMBRE DE USUARIO
@@ -112,7 +116,7 @@ if (isset($_POST["validarAcceso"])) {
 
 if (isset($_POST["validarDni"])) {
 
-    $valDni = new AjaxAcceso();
-    $valDni->validarDni = $_POST["validarDni"];
-    $valDni->ajaxValidarDni();
+  $valDni = new AjaxAcceso();
+  $valDni->validarDni = $_POST["validarDni"];
+  $valDni->ajaxValidarDni();
 }

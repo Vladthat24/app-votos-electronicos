@@ -171,12 +171,14 @@ class ControladorUsuarios
         return $respuesta;
     }
 
-    static public function ctrMostrarUsuariosPersonal($item, $item2, $valor)
+    static public function ctrMostrarUsuariosPersonal($valor)
     {
 
         $tabla = "tap_empleado";
 
-        $respuesta = ModeloUsuarios::mdlMostrarUsarioPersonal($tabla, $item, $item2, $valor);
+        $item = "id";
+
+        $respuesta = ModeloUsuarios::mdlMostrarUsuariosPersonal($tabla, $item, $valor);
 
         return $respuesta;
     }
@@ -309,7 +311,7 @@ class ControladorUsuarios
                     "cargo" => $_POST["editarCargo"],
                     "foto" => $ruta
                 );
-            
+
                 $respuesta = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
 
                 if ($respuesta == "ok") {

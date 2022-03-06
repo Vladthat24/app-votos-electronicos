@@ -12,6 +12,18 @@ class ControladorAcceso
 
         return $respuesta;
     }
+
+
+    
+    static public function ctrActualizarAcceso( $item1, $valor1, $item2, $valor2)
+    {
+
+        $tabla = "tap_acceso";
+
+        $respuesta = ModeloAcceso::mdlActualizarAcceso($tabla, $item1, $valor1, $item2, $valor2)
+;
+        return $respuesta;
+    }
     /* =============================================
       INGRESO DE USUARIO
       ============================================= */

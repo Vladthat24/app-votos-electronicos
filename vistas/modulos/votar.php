@@ -93,7 +93,7 @@
                     }
                 } else {
 
-                    if ($hora >= '08:00' && $hora <= '16:00') {
+                    if ($hora >= '08:00' && $hora <= '10:00') {
 
                         if (isset($_SESSION["estado_voto"])) {
 
@@ -117,24 +117,32 @@
 
                                     echo '
                                     <div class="col-sm-3 col-xs-12">
-
+        
                                         <div class="card" style="width: 50%;">';
-
-                                    if ($value["foto"] != "") {
-
-                                        echo ' <img class="card-img-top" src="' . $value["foto"] . '" width="160" height="160" style="display:block;margin:auto;">';
-                                    } else {
-
-                                        echo ' <img class="card-img-top" src="vistas/img/usuarios/default/anonymous.png" width="160" height="160" style="display:block;margin:auto;">';
-                                    }
-
-                                    echo '<div class="card-body">
-
+        
+                                if ($value["foto"] != "") {
+        
+                                    echo ' <img class="card-img-top" src="' . $value["foto"] . '" width="160" height="160" style="display:block;margin:auto;">';
+                                } else {
+        
+                                    echo ' <img class="card-img-top" src="vistas/img/usuarios/default/anonymous.png" width="160" height="160" style="display:block;margin:auto;">';
+                                }
+        
+        
+                                echo '<div class="card-body">
+                                             
+        
+                                            </div>
+                                            <div class="card-footer" style="text-align:center;margin-top:10px;">
+                                            <p> ' . $value["lista"] . '</p>
+                                        </div>
                                             <div class="card-footer" style="margin:10px;">
                                                 <button type="button" class="btn btn-primary btnVotar" idLista="' . $value["idlista"] . '" idUser="' . $idLista . '" style="display:block;margin:auto;">Votar</button>
                                             </div>
-
+        
+        
                                         </div>
+        
                                     </div>';
                                 }
                             } else {

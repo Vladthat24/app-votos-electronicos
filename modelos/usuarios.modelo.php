@@ -35,7 +35,8 @@ class ModeloUsuarios
         $stmt = null;
     }
 
-    static public function mdlMostrarUsarioPersonal($tabla, $item, $item2, $valor)
+
+    static public function mdlMostrarUsuariosPersonal($tabla, $item, $valor)
     {
 
         if ($item != null) {
@@ -46,12 +47,10 @@ class ModeloUsuarios
 
             $stmt->execute();
 
-            return $stmt->fetch();
+            return $stmt->fetchAll();
         } else {
 
-            $stmt = Conexion::conectar()->prepare("SELECT * WHERE $item2=:$item2 ORDER BY id DESC");
-
-            $stmt->bindParam(":" . $item2, $valor, PDO::PARAM_STR);
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
 
             $stmt->execute();
             //

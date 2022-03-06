@@ -48,7 +48,7 @@
 
                     <label>Hasta</label>
 
-                    <input type="date" class="form-control" placeholder="End" id="end_date"name="fechaFinal" value="<?php echo date("Y-m-d"); ?>" />
+                    <input type="date" class="form-control" placeholder="End" id="end_date" name="fechaFinal" value="<?php echo date("Y-m-d"); ?>" />
 
                     <button class="btn btn-primary" name="search" id="search">
 
@@ -64,33 +64,104 @@
             </div>
 
             <div class="box-body">
+                <?php
+                if ($_SESSION["roles"] == "ELECTORES") {
+                ?>
+                    <table class="table table-bordered table-striped dt-responsive" width="100%" id="tablaElectores">
 
-                <table class="table table-bordered table-striped dt-responsive" width="100%" id="order_data">
+                        <thead>
 
-                    <thead>
+                            <tr>
 
-                        <tr>
+                                <th style="width:10px">#</th>
+                                <th>Datos Completos</th>
+                                <th>DNI</th>
+                                <th>Oficina</th>
+                                <th>Cargo</th>
+                                <th>Fecha Registro</th>
+                                <th>Foto</th>
+                                <th>Estado del Voto</th>
+                                <th>Codigo Voto</th>
 
-                            <th style="width:10px">#</th>
-                            <th>Datos Completos</th>
-                            <th>DNI</th>
-                            <th>Oficina</th>
-                            <th>Cargo</th>
-                            <th>Foto</th>
-                            <th>Fecha Registro</th>
-                            <th>Estado del Voto</th>
-                            <th>Codigo Voto</th>
-                            <th>Acciones</th>
-                        </tr>
+                            </tr>
 
-                    </thead>
+                        </thead>
 
-                    <tbody>
+                        <tbody>
+                            <?php
 
-                    </tbody>
+                            $valor = $_SESSION["id"];
 
-                </table>
+                            $usuario = ControladorUsuarios::ctrMostrarUsuariosPersonal($valor);
+                            /* var_dump($usuario); */
+                            foreach ($usuario as $key => $value) {
+                                
+                                echo ' <tr>
+                                  <td>' . ($key + 1) . '</td>
+                                
+                                  <td>' . $value["datos_completos"] . '</td>
+                                  <td>' . $value["dni"] . '</td>
+                                  <td>' . $value["oficina"] . '</td>
+                                  <td>' . $value["cargo"] . '</td>
+                                  <td>' . $value["fecha_registro"] . '</td>';
 
+                                if ($value["foto"] != "") {
+
+                                    echo '<td><img src="' . $value["foto"] . '" class="img-thumbnail" width="40px"></td>';
+                                } else {
+
+                                    echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
+                                }
+
+                                if ($value["estado_voto"] != 0) {
+
+                                    echo '<td><button class="btn btn-success btn-xs" estadoVoto="' . $value["estado_voto"] . '">Sufragado</button></td>';
+                                } else {
+
+                                    echo '<td><button class="btn btn-danger btn-xs" estadoVoto="' . $value["estado_voto"] . '">No Sufragado</button></td>';
+                                }
+
+                                echo '<td><button class="btn btn-primary btn-xs btnCodigoVoto" style="margin-left:35%;" idUsuarioCodigo="' . $value["id"] . '"><i class="fa fa-eye"></i></button></td>
+                                
+                                </tr>';
+                            }
+
+
+                            ?>
+                        </tbody>
+
+                    </table>
+
+
+                <?php
+                } else {
+                ?>
+                    <table class="table table-bordered table-striped dt-responsive" width="100%" id="order_data">
+
+                        <thead>
+
+                            <tr>
+
+                                <th style="width:10px">#</th>
+                                <th>Datos Completos</th>
+                                <th>DNI</th>
+                                <th>Oficina</th>
+                                <th>Cargo</th>
+                                <th>Foto</th>
+                                <th>Fecha Registro</th>
+                                <th>Estado del Voto</th>
+                                <th>Codigo Voto</th>
+                                <th>Acciones</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+
+                    </table>
+                <?php } ?>
             </div>
 
         </div>

@@ -48,7 +48,7 @@ if ($_SESSION["roles"] == "ADMINISTRADOR") {
     }
 } else if ($_SESSION["roles"] == "COMITE ELECTORAL") {
 
-    if ($hora >= '08:00' && $hora <= '16:00') {
+    if ($hora >= '08:00' && $hora <= '23:00') {
 
         $item = null;
         $valor = null;

@@ -179,22 +179,20 @@ $("#order_data_acceso").on("click", ".btnEditarAcceso", function () {
 /*=============================================
  ACTIVAR USUARIO
  =============================================*/
-$("").on("click", ".btnActivar", function () {
+$("#order_data_acceso").on("click", ".btnActivar", function () {
 
+    var idAcceso = $(this).attr("idAcceso");
+    var estadoAcceso = $(this).attr("estadoAcceso");
 
-
-    var idUsuario = $(this).attr("idUsuario");
-    var estadoUsuario = $(this).attr("estadoUsuario");
-
-    console.log(idUsuario, estadoUsuario);
+    console.log(idAcceso, estadoAcceso);
 
     var datos = new FormData();
-    datos.append("activarId", idUsuario);
-    datos.append("activarUsuario", estadoUsuario);
+    datos.append("activarId", idAcceso);
+    datos.append("activarAcceso", estadoAcceso);
 
     $.ajax({
 
-        url: "ajax/usuarios.ajax.php",
+        url: "ajax/acceso.ajax.php",
         method: "POST",
         data: datos,
         cache: false,
@@ -202,10 +200,12 @@ $("").on("click", ".btnActivar", function () {
         processData: false,
         success: function (respuesta) {
 
+            console.log(respuesta);
+
             if (window.matchMedia("(max-width:767px)").matches) {
 
                 swal({
-                    title: "El usuario ha sido actualizado",
+                    title: "El Acceso ha sido actualizado",
                     type: "success",
                     confirmButtonText: "¡Cerrar!"
                 }).then(function (result) {
@@ -224,19 +224,19 @@ $("").on("click", ".btnActivar", function () {
 
     })
 
-    if (estadoUsuario == 0) {
+    if (estadoAcceso == 0) {
 
         $(this).removeClass('btn-success');
         $(this).addClass('btn-danger');
         $(this).html('Desactivado');
-        $(this).attr('estadoUsuario', 1);
+        $(this).attr('estadoAcceso', 1);
 
     } else {
 
         $(this).addClass('btn-success');
         $(this).removeClass('btn-danger');
         $(this).html('Activado');
-        $(this).attr('estadoUsuario', 0);
+        $(this).attr('estadoAcceso', 0);
 
     }
 

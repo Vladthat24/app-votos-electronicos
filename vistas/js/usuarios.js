@@ -208,6 +208,41 @@ $("#order_data").on("click", ".btnCodigoVoto", function () {
 
 
 })
+
+$("#tablaElectores").on("click", ".btnCodigoVoto", function () {
+    var idUsuarioVoto = $(this).attr("idUsuarioCodigo");
+
+
+    var datos = new FormData();
+    datos.append("idUsuario", idUsuarioVoto);
+
+    $.ajax({
+        url: "ajax/usuarios.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function (respuesta) {
+            console.log(respuesta);
+
+            swal({
+                title: 'Tú codigo de sufragio es: <br><strong style="color:blue;">"' + respuesta["codigovoto"] + '"</strong>',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+
+        }
+    })
+
+
+
+})
 /*=============================================
  EDITAR USUARIO
  =============================================*/

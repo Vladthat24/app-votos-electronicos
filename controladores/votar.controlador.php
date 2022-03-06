@@ -80,6 +80,7 @@ class ControladorVotar
 
         if ($estadoVotar == "ok" && $codigoVoto == "ok") {
 
+          
 
           session_destroy();
 

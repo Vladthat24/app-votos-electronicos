@@ -89,9 +89,9 @@ if (mysqli_connect_errno()) {
 		$sub_array[] = $row["fecha_registro"];
 
 		if ($row["estado"] != 0) {
-			$sub_array[] = '<td><button class="btn btn-success btn-xs" idAcceso="' . $row["id"] . '" estadoVoto="0">Activado</button></td>';
+			$sub_array[] = '<td><button class="btn btn-success btn-xs btnActivar" idAcceso="' . $row["id"] . '" estadoAcceso="0">Activado</button></td>';
 		} else {
-			$sub_array[] = '<td><button class="btn btn-danger btn-xs" idAcceso="' . $row["id"] . '" estadoVoto="1">Desactivado</button></td>';
+			$sub_array[] = '<td><button class="btn btn-danger btn-xs btnActivar" idAcceso="' . $row["id"] . '" estadoAcceso="1">Desactivado</button></td>';
 		}
 		$sub_array[] = '<td><button class="btn btn-warning btnEditarAcceso" idAcceso="' . $row["id"] . '" data-toggle="modal" data-target="#modalEditarAcceso"><i class="fa  fa-pencil"></i></button><button class="btn btn-danger btnEliminarAcceso" idAcceso="' . $row["id"] . '" ><i class="fa fa-times"></i></button></td>';
 
